@@ -1,33 +1,98 @@
-<?php get_header(); ?>
-	<div id="primary" class="site-content">
-		<div id="content" role="main">
+<?php // staffer single template
+	get_header(); ?>
 
+<?php
+	// prints the start wrapper
+	// must be carried over if using a custom template, else options will not work
+	$stafferoptions = get_option ( 'staffer' );
+	if (isset ($stafferoptions['customwrapper']) && isset ($stafferoptions['startwrapper'])) {
+		$customstartwrapper = $stafferoptions['startwrapper'];
+		echo $stafferoptions['startwrapper'];
+		}
+		else {
+			include ( plugin_dir_path (__FILE__) . 'inc/start-wrapper.php');
+			}
+			?>
+			
+		<?php if (have_posts() ) : ?>
+		
 			<?php while ( have_posts() ) : the_post(); ?>
 
-				<?php //get_template_part( 'content', get_post_format() ); ?>
-
-<?php 
-	echo '<h2>';
-	echo the_title();
-	echo '</h2>';
-	if ( get_post_meta ($post->ID,'staffer_staff_title', true) != '' ) {
-		echo '<em>';
-		echo get_post_meta ($post->ID,'staffer_staff_title', true) . '</em><br>';
-		}
-	the_post_thumbnail ( array ('200', '300') );
-	echo '<br>';
-	if ( get_post_meta ($post->ID,'staffer_staff_about', true) != '' ) {
-		$stafferbio = get_post_meta ($post->ID,'staffer_staff_about', true); ?>
-		<div class="entry-content">
-		<?php
-		echo wpautop( $stafferbio ); ?>
+	<header class="staffer-staff-header">
+		<?php 
+			// checks for slug and builds path
+			$pageslug = $stafferoptions['slug'];
+			$pagetitle = $stafferoptions['ptitle'];
+			$homeurl = esc_url( home_url( '/' ) );
+			$basepageurl = $homeurl . $pageslug
+		?>
+		<div class="staffer-breadcrumbs">
+			<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" itemprop="url"><?php _e ('Home', 'staffer'); ?></a> &#8250;
+				<a href="<?php echo esc_url ($basepageurl) ; ?>" itemprop="url"><?php echo $pagetitle; ?></a> &#8250;
+				<span itemprop="title"><?php the_title(); ?></span>
+			</div>
 		</div>
-		<?php } ?>
+		<?php 
+			echo '<h2>';
+			echo the_title();
+			echo '</h2>';
+			if ( get_post_meta ($post->ID,'staffer_staff_title', true) != '' ) {
+				echo '<em>';
+				echo get_post_meta ($post->ID,'staffer_staff_title', true) . '</em><br>';
+				}  ?>
+	</header>
 
-				<?php comments_template( '', true ); ?>
+		<div class="staff-content">
+		<?php
+		the_post_thumbnail ( 'medium', array ('class' => 'alignleft') );
+			the_content(); ?>
+		</div>
+	
+	<section class="staffer-staff-social-links">
+	<?php
+	// social + contact links
+	if ( get_post_meta ($post->ID,'staffer_staff_fb', true) != '' ) { ?>
+		<a href="<?php echo get_post_meta ($post->ID,'staffer_staff_fb', true); ?>" target="_blank">
+			<i class="fa fa-facebook fa-fw"></i></a>
+	<?php 
+		}
+	if ( get_post_meta ($post->ID,'staffer_staff_gplus', true) != '' ) { ?>
+		<a href="<?php echo get_post_meta ($post->ID,'staffer_staff_gplus', true); ?>" target="_blank">
+			<i class="fa fa-google-plus fa-fw"></i></a>
+	<?php }
+	if ( get_post_meta ($post->ID,'staffer_staff_twitter', true) != '' ) { ?>
+		<a href="<?php echo get_post_meta ($post->ID,'staffer_staff_twitter', true); ?>" target="_blank">
+			<i class="fa fa-twitter fa-fw"></i></a>
+	<?php }
+	if ( get_post_meta ($post->ID,'staffer_staff_linkedin', true) != '' ) { ?>
+		<a href="<?php echo get_post_meta ($post->ID,'staffer_staff_linkedin', true); ?>" target="_blank">
+			<i class="fa fa-linkedin fa-fw"></i></a>
+	<?php }
+	if ( get_post_meta ($post->ID,'staffer_staff_email', true) != '' ) {
+		$email = get_post_meta ($post->ID,'staffer_staff_email', true); ?>
+		<a href="mailto:<?php echo antispambot($email);?>?Subject=<?php _e ('Contact from ', 'staffer'); ?><?php bloginfo('name'); ?>" target="_blank">
+			<i class="fa fa-envelope fa-fw"></i></a>
+	<?php }
+	?>
+	</section>
 
-			<?php endwhile; // end of the loop. ?>
+			<?php endwhile;
+					endif; ?>
 
-		</div><!-- #content -->
-	</div><!-- #primary -->
+	<?php
+		// prints the end wrapper
+		// must be carried over if using a custom template, else options will not work
+		if (isset ($stafferoptions['customwrapper']) && isset ($stafferoptions['endwrapper'])) {
+			$customstartwrapper = $stafferoptions['endwrapper'];
+			echo $stafferoptions['endwrapper'];
+			}
+			else {
+				include ( plugin_dir_path (__FILE__) . 'inc/end-wrapper.php');
+				}
+				?>
+<?php if (isset ($stafferoptions['sidebar'] ) ) {
+	get_sidebar();
+	}
+	?>			
 <?php get_footer(); ?>
