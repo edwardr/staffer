@@ -54,5 +54,21 @@ You may seek community support within the WordPress.org forums. I will try to mo
 4. Staff profile editor
 
 == Changelog ==
+= 1.2 =
+= October 11, 2014 =
+* fixes custom post type conflict
+= 1.1 =
+= October 10, 2014 =
+* Moved register_post_type to activation hook
+* Added custom label field for proper title tag handling
+* Added website field to profiles
+* Changed <section> to <div> in single-staff.php for validation
+* Added built-in wrappers for most of top 20 popular WordPress themes
 = 1.0 =
 * Initial release
+
+== Upgrade Notice ==
+= 1.2 =
+Fixes custom post type conflict
+= 1.1 =
+Cleans up activation and adds new website field and custom labeling. Adds more built-in wrappers for better theme support.

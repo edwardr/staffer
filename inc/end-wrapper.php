@@ -17,6 +17,21 @@ $currenttemplate = get_option( 'template' );
 			case 'twentyfourteen' :
 				echo '</div></div></div>';
 				break;
+			case 'bartleby' :
+				echo '</div></div></div>';
+				break;
+			case 'newsframe' :
+				echo '</div></div></div>';
+				break;
+			case 'ifeature' :
+				echo '</div></div></div></div></div>';
+				break;
+			case 'colorway' :
+				echo '</div></div><div class="clear"></div>';
+				break;
+			case 'virtue' :
+				echo '</div>';
+				break;
 			default :
 				echo '</div></div>';
 				break;

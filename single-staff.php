@@ -49,7 +49,7 @@
 			the_content(); ?>
 		</div>
 	
-	<section class="staffer-staff-social-links">
+	<div class="staffer-staff-social-links">
 	<?php
 	// social + contact links
 	if ( get_post_meta ($post->ID,'staffer_staff_fb', true) != '' ) { ?>
@@ -74,8 +74,13 @@
 		<a href="mailto:<?php echo antispambot($email);?>?Subject=<?php _e ('Contact from ', 'staffer'); ?><?php bloginfo('name'); ?>" target="_blank">
 			<i class="fa fa-envelope fa-fw"></i></a>
 	<?php }
+	if ( get_post_meta ($post->ID,'staffer_staff_website', true) != '' ) {
+		$website = get_post_meta ($post->ID,'staffer_staff_website', true); ?>
+		<a href="<?php echo get_post_meta ($post->ID,'staffer_staff_website', true); ?>" target="_blank">
+			<i class="fa fa-user fa-fw"></i></a>
+	<?php }
 	?>
-	</section>
+	</div>
 
 			<?php endwhile;
 					endif; ?>
