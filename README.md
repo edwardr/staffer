@@ -28,11 +28,11 @@ For now, use a custom ordering plugin, such as Post Types Order, available in th
 
 Custom content wrappers are used when Staffer doesn't flow well with your theme. Due to the incredible diversity of WordPress themes, I've included this option for folks that find the default wrappers do not work for them. You will need to utilize Chrome's Developer Tools or a Firefox add-on like Firebug to inspect the page elements to find your theme's content wrappers. For example, here is the start of the content wrapper for the Twenty-Twelve theme:
 
-```<div id="primary" class="site-content"><div id="content" role="main">```
+`<div id="primary" class="site-content"><div id="content" role="main">`
 
 And here is the end wrapper:
 
-```</div></div>```
+`</div></div>`
 
 <h4>What Size Should the Staff Images Be?</h4>
 
