@@ -3,27 +3,27 @@
 $stafferoptions = get_option('staffer');
 
 // checks the post per page option
-if ( $stafferoptions['perpage'] != null ) {
-	$postsperpage = $stafferoptions['perpage'];
-}
-else {
-	$postsperpage = 9;
-}
-					$args = array ( 
-						'post_type' => 'staff',
-						'pagination'	=> true,
-						'posts_per_page' => $postsperpage, 
-						'paged' => $paged
-						);
-					$the_query = new WP_Query( $args );
+//if ( $stafferoptions['perpage'] != null ) {
+	//$postsperpage = $stafferoptions['perpage'];
+//}
+//else {
+	//$postsperpage = 9;
+//}
+					//$args = array ( 
+					//	'post_type' => 'staff',
+						//'pagination'	=> true,
+					//	'posts_per_page' => $postsperpage, 
+						//'paged' => $paged
+						//);
+					//$the_query = new WP_Query( $args );
 					
-			if ($the_query->have_posts() ) : ?>
+			if (have_posts() ) : ?>
 			
 			<ul class="staffer-archive-list">
 			
-			<?php while ( $the_query->have_posts() ) : ?>
+			<?php while ( have_posts() ) : ?>
 			
-			<?php $the_query->the_post(); ?>
+			<?php the_post(); ?>
 
 				<li>
 				<header class="staffer-staff-header">
@@ -41,7 +41,14 @@ else {
 				</header>
 					<div class="staff-content">
 					<?php the_post_thumbnail ( 'medium', array ('class' => 'alignleft') );
-						the_excerpt(); ?>
+						if ($stafferoptions['estyle'] == null or $stafferoptions['estyle'] == 'excerpt' ) {
+							the_excerpt();
+						} elseif ($stafferoptions['estyle'] == 'full' ) {
+							the_content();
+						} elseif ($stafferoptions['estyle'] == 'none' ) {
+							// nothing to see here
+						} 
+						?>
 					</div>
 				</li>
 			<?php endwhile;

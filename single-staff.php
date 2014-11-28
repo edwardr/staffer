@@ -21,10 +21,22 @@
 	<header class="staffer-staff-header">
 		<?php 
 			// checks for slug and builds path
+			if ( get_option ('permalink_structure') ) {
+
 			$pageslug = $stafferoptions['slug'];
-			$pagetitle = $stafferoptions['ptitle'];
+			if ( $pageslug == '' ) {
+					$pageslug = 'staff';
+				}
 			$homeurl = esc_url( home_url( '/' ) );
-			$basepageurl = $homeurl . $pageslug
+			$basepageurl = $homeurl . $pageslug;
+			} else {
+			$homeurl = esc_url( home_url( '/' ) );
+			$basepageurl = $homeurl . '?post_type=staff';
+			}
+			$pagetitle = $stafferoptions['ptitle'];
+			if ($pagetitle == '' ) {
+				$pagetitle = 'Staff';
+			}
 		?>
 		<div class="staffer-breadcrumbs">
 			<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
@@ -40,7 +52,14 @@
 			if ( get_post_meta ($post->ID,'staffer_staff_title', true) != '' ) {
 				echo '<em>';
 				echo get_post_meta ($post->ID,'staffer_staff_title', true) . '</em><br>';
-				}  ?>
+				}
+			$terms = get_the_term_list ( $post->ID, 'department', '', ', ' );
+			if ( $terms != '' ) {
+				echo '<em>';
+				_e ( 'Department: ', 'staffer' );
+				echo $terms;
+				echo '</em>';
+				} ?>
 	</header>
 
 		<div class="staff-content">
@@ -79,6 +98,10 @@
 		<a href="<?php echo get_post_meta ($post->ID,'staffer_staff_website', true); ?>" target="_blank">
 			<i class="fa fa-user fa-fw"></i></a>
 	<?php }
+	if ( get_post_meta ($post->ID,'staffer_staff_phone', true) != '' ) {
+		$phone = get_post_meta ($post->ID,'staffer_staff_phone', true); ?>
+			<span><?php echo get_post_meta ($post->ID,'staffer_staff_phone', true); ?></span>
+	<?php }
 	?>
 	</div>
 
@@ -95,9 +118,5 @@
 			else {
 				include ( plugin_dir_path (__FILE__) . 'inc/end-wrapper.php');
 				}
-				?>
-<?php if (isset ($stafferoptions['sidebar'] ) ) {
-	get_sidebar();
-	}
-	?>			
+				?>			
 <?php get_footer(); ?>

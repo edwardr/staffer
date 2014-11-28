@@ -1,4 +1,4 @@
-<?php // staffer archive template
+<?php // staffer department template
 	get_header(); ?>
 
 <?php 
@@ -13,23 +13,18 @@
 			include ( plugin_dir_path (__FILE__) . 'inc/start-wrapper.php');
 			}
 			
-			// checks for the custom title
-			$stafferarchivetitle = $stafferoptions['ptitle'];
-			if ( isset ( $stafferarchivetitle ) && ($stafferarchivetitle != '' ) ) {
+			// retrieves tax title
+			$department = get_queried_object()->name;
+			$department = ucwords ( $department );
 			?>
-			<h2 class="staffer-archive-page-title"><?php echo $stafferarchivetitle; ?></h2>
-			<?php }
-				else {
-				?>
-			<h2 class="staffer-archive-page-title"><?php post_type_archive_title(); ?></h2>
-			<?php } ?>
+			<h2 class="staffer-archive-page-title"><?php echo $department; ?></h2>
 
 			<?php
 				// adds description if present
-				$stafferdescription = $stafferoptions['sdesc'];
-				if ($stafferdescription != '') { ?>
+				$taxdescription = term_description();
+				if ($taxdescription != '') { ?>
 				<div class="staffer-page-description">
-					<?php echo wpautop( $stafferdescription ); ?>
+					<?php echo wpautop( $taxdescription ); ?>
 				</div>
 			<?php } ?>
 

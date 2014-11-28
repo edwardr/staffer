@@ -4,15 +4,25 @@
 	Plugin URI: https://www.edwardrjenkins.com/wordpress-plugins/staffer/
 	Description: A WordPress plugin that adds staff management and custom staff profile pages.
 	Author: Edward R. Jenkins
-	Version: 1.2
+	Version: 1.3
 	Author URI: https://edwardrjenkins.com
 	Text Domain: staffer
-	Domain Path: /lang
+	Domain Path: /languages
  */
+
+// loads language pack
+function staffer_load_textdomain() {
+  load_plugin_textdomain( 'staffer', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' ); 
+}
+add_action( 'init', 'staffer_load_textdomain' );
+
 add_action('admin_init', 'staffer_init' );
 add_action('admin_menu', 'staffer_add_page');
 // staffer init
 function staffer_init(){
+	if (delete_transient('staffer_flush_rules')) {
+		 flush_rewrite_rules();
+		}
 	register_setting( 'staffer_options', 'staffer', 'staffer_validate' );
 }
 // adds menu page
@@ -22,7 +32,10 @@ function staffer_add_page() {
 // writes the menu page
 function staffer_do_page() {
 	$supportsite = 'https://www.edwardrjenkins.com';
-		_e('<h4>For paid support or customizations, please contact me at <a href="'.$supportsite.'" target="_blank">edwardrjenkins.com</a></h4>','staffer');
+		echo '<h4>';
+		_e('For paid support or customizations, please contact me at', 'staffer' );
+		echo ' <a href="'.$supportsite.'" target="_blank">edwardrjenkins.com</a>';
+		echo '</h4>';
 		?>
 	<div class="wrap">
 		<h2><?php _e ('Staffer Options Panel', 'staffer'); ?></h2>
@@ -30,54 +43,70 @@ function staffer_do_page() {
 			<?php settings_fields('staffer_options'); ?>
 			<?php $stafferoptions = get_option('staffer'); ?>
 			<table class="form-table">
-				<tr valign="top"><th scope="row"><?php _e ('Staff Layout'); ?></th>
+				<tr valign="top"><th scope="row"><?php _e ('Staff Layout', 'staffer'); ?></th>
 				<td><input name="staffer[gridlayout]" type="checkbox" value="1" <?php checked(true, $stafferoptions['gridlayout']); ?> />
-					<p class="description"><?php _e('Check this to use the staff grid layout.'); ?></p>
+					<p class="description"><?php _e('Check this to use the staff grid layout.', 'staffer'); ?></p>
 				</td>
 				</tr>
-				<tr valign="top"><th scope="row"><?php _e ('Listings per page'); ?></th>
+
+				<tr valign="top"><th scope="row"><?php _e ('Excerpt Style', 'staffer'); ?></th>
+				<td>
+				<?php $staffer_estyle = $stafferoptions['estyle']; ?>
+				<select name="staffer[estyle]">
+					<option value="excerpt" <?php if ($staffer_estyle == "excerpt") echo ('selected="selected"'); ?> ><?php _e ('Excerpt', 'staffer' ); ?></option>
+					<option value="full" <?php if ($staffer_estyle == "full") echo ('selected="selected"'); ?> ><?php _e ('Full', 'staffer' ); ?></option>
+					<option value="none" <?php if ($staffer_estyle == "none") echo ('selected="selected"'); ?> ><?php _e ('Disabled', 'staffer' ); ?></option>
+				</select>
+					<p class="description"><?php _e('Choose your staff listing excerpt style.', 'staffer'); ?></p>
+				</td>
+				</tr>
+
+				<tr valign="top"><th scope="row"><?php _e ('Staffer Main Page Description', 'staffer'); ?></th>
+				<td>
+				<?php 
+					$text =  $stafferoptions['sdesc'];
+					wp_editor( $text, 'sdesc', array( 'textarea_name' => 'sdesc', 'media_buttons' => true, 'textarea_rows' => '10' ) ); ?>
+					<p class="description"><?php _e('Add a description for the Staffer directory, which will appear below the main directory title.', 'staffer'); ?></p>
+				</td>
+				</tr>
+				<tr valign="top"><th scope="row"><?php _e ('Listings per page', 'staffer'); ?></th>
 				<td><input type="number" size="80" max="99" name="staffer[perpage]" value='<?php echo $stafferoptions['perpage']; ?>' />
-					<p class="description"><?php _e('Set the number of staff members per page. Leave blank for the default of 9.', 'staffer'); ?></p>
+					<p class="description"><?php _e('Set the number of staff members per page. Leave blank to inherit the Settings->Reading.', 'staffer'); ?></p>
 				</td>
 				</tr>
-				<tr valign="top"><th scope="row"><?php _e ('Staffer Page Title'); ?></th>
+				<tr valign="top"><th scope="row"><?php _e ('Staffer Page Title', 'staffer'); ?></th>
 				<td><input type="text" size="80" name="staffer[ptitle]" value='<?php echo $stafferoptions['ptitle']; ?>' />
 					<p class="description"><?php _e('Set a custom Staffer page title, if desired. The default title is <code>Staff</code>. This title will be used as the archive page title and within breadcrumbs. Leave blank to use the default.', 'staffer'); ?></p>
 				</td>
 				</tr>
-				<tr valign="top"><th scope="row"><?php _e ('Staffer Label'); ?></th>
+				<tr valign="top"><th scope="row"><?php _e ('Staffer Label', 'staffer'); ?></th>
 				<td><input type="text" size="80" name="staffer[label]" value='<?php if ( isset ($stafferoptions['label'] ) ) { echo $stafferoptions['label']; } ?>' />
 					<p class="description"><?php _e('Set a custom label, if desired. This is shown in the admin panel and is used in the <code>title</code> tag. The default label is <code>Staff</code>. Leave blank to use the default.', 'staffer'); ?></p>
 				</td>
 				</tr>				
-				<tr valign="top"><th scope="row"><?php _e ('Staffer URL slug'); ?></th>
+				<tr valign="top"><th scope="row"><?php _e ('Staffer URL slug', 'staffer'); ?></th>
 				<td><input type="text" size="80" name="staffer[slug]" value='<?php echo $stafferoptions['slug']; ?>' />
 					<p class="description"><?php _e('Set a custom URL slug, if desired. The default slug is <code>staff</code>.<strong>Notice:</strong> Use lowercase only, and use no spaces, i.e., instead of using <code>Staff Pages</code>, use <code>staff-pages</code>. Leave blank to use the default.', 'staffer'); ?></p>
 				</td>
 				</tr>
-				<tr valign="top"><th scope="row"><?php _e ('Disable CSS'); ?></th>
+				<tr valign="top"><th scope="row"><?php _e ('Disable CSS', 'staffer'); ?></th>
 				<td><input name="staffer[disablecss]" type="checkbox" value="1" <?php checked(true, $stafferoptions['disablecss']); ?> />
-					<p class="description"><?php _e('Check this box to disable all Staffer CSS.'); ?></p>
+					<p class="description"><?php _e('Check this box to disable all Staffer CSS.', 'staffer'); ?></p>
 				</td>
 				</tr>
-				<tr valign="top"><th scope="row"><?php _e ('Use custom wrappers'); ?></th>
+				<tr valign="top"><th scope="row"><?php _e ('Use custom wrappers', 'staffer'); ?></th>
 				<td><input name="staffer[customwrapper]" type="checkbox" value="1" <?php checked(true, $stafferoptions['customwrapper']); ?> />
-					<p class="description"><?php _e('Check this box and enter your wrappers below to use custom content wrappers. See the documentation for details. You may need to use custom wrappers if Staffer pages do not flow well with your theme.'); ?></p>
+					<p class="description"><?php _e('Check this box and enter your wrappers below to use custom content wrappers. See the documentation for details. You may need to use custom wrappers if Staffer pages do not flow well with your theme.', 'staffer'); ?></p>
 				</td>
 				</tr>
-				<tr valign="top"><th scope="row"><?php _e ('Custom start wrapper'); ?></th>
+				<tr valign="top"><th scope="row"><?php _e ('Custom start wrapper', 'staffer'); ?></th>
 				<td><input type="text" size="80" name="staffer[startwrapper]" value='<?php echo $stafferoptions['startwrapper']; ?>' />
 					<p class="description"><?php _e('Enter your custom start wrapper.', 'staffer'); ?></p>
 				</td>
 				</tr>
-				<tr valign="top"><th scope="row"><?php _e ('Custom end wrapper'); ?></th>
+				<tr valign="top"><th scope="row"><?php _e ('Custom end wrapper', 'staffer'); ?></th>
 				<td><input type="text" size="80" name="staffer[endwrapper]" value='<?php echo $stafferoptions['endwrapper']; ?>' />
 					<p class="description"><?php _e('Enter your custom ending wrapper. This should close out the wrapper started above.', 'staffer'); ?></p>
-				</td>
-				</tr>
-				<tr valign="top"><th scope="row"><?php _e ('Enable Staff Sidebar'); ?></th>
-				<td><input name="staffer[sidebar]" type="checkbox" value="1" <?php checked(true, $stafferoptions['sidebar']); ?> />
-					<p class="description"><?php _e('*Experimental feature. Does not work with all layouts. Create a custom Staffer template for better sidebar control.'); ?></p>
 				</td>
 				</tr>
 				<tr valign="top"><th scope="row"><?php _e ('Custom CSS'); ?></th>
@@ -88,7 +117,7 @@ function staffer_do_page() {
 				</tr>
 			</table>
 			<p class="submit">
-			<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
+			<input type="submit" class="button-primary" value="<?php _e('Save Changes', 'staffer') ?>" />
 			</p>
 		</form>
 
@@ -107,30 +136,54 @@ function staffer_validate($input) {
 	// Our first value is either 0 or 1
 	if ( ! isset( $input['disablecss'] ) )
 	$input['disablecss'] = null;
-	if ( ! isset( $input['sidebar'] ) )
-	$input['sidebar'] = null;
 	if ( ! isset( $input['label'] ) )
 	$input['label'] = 'Staff';
 	if ( ! isset ($input['customwrapper']) )
 	$input['customwrapper'] = null;
 	if ( ! isset ($input['gridlayout']) )
 	$input['gridlayout'] = null;
+	if ( ! isset ($input['estyle']) )
+	$input['estyle'] = 'excerpt';
 	// Say our second option must be safe text with no HTML tags
 	$input['perpage'] =  esc_html( $input['perpage'] );
 	//if ( ! isset ($input['slug'] ) ) {
 	$input['slug'] = sanitize_title_with_dashes ($input['slug']);
 	$input['ptitle'] = ucfirst ($input['ptitle']);
 	$input['label'] = ucfirst ($input['label']);
+	$input['sdesc'] = stripslashes ( $_POST['sdesc'] );
 	//} else {
 	//$input['slug'] = 'staff';
 	//}
 	$input['startwrapper'] =  wp_kses_post( $input['startwrapper'] );
 	$input['endwrapper'] =  wp_kses_post ( $input['endwrapper'] );
 	$input['customcss'] = wp_kses_post ( $input['customcss'] );
-		return $input;
 	// in case of slug change
-	flush_rewrite_rules();
+	set_transient('staffer_flush_rules', true);
+		return $input;
 }
+
+// sets up the taxonomy
+function staffer_taxonomy () {
+	$stafferoptions = get_option ('staffer');
+	$stafferslug = $stafferoptions['slug'];
+	if ( $stafferslug == '' ) {
+		$stafferslug = 'department';
+	}
+	$taxslug = $stafferslug . '/department';
+	register_taxonomy(
+		'department',
+		'staff',
+		array(
+			'hierarchical' => true,
+			'label' => __( 'Departments' ),
+			'rewrite' => array( 'slug' => $taxslug, 'hierarchical' => true),
+			'query_var'    => 'department',
+			'public' => true,
+		)
+	);
+	}
+add_action ('init', 'staffer_taxonomy');
+
 	// custom post type for staff
 	function create_staff_cpt_staffer() {
 		$stafferoptions = get_option ('staffer');
@@ -219,6 +272,9 @@ function staffer_staff_role_box($post) {
 				$value = get_post_meta($post->ID, 'staffer_staff_email', true);
 				echo '<label for="staffer_staff_email"><strong>Email</strong></label>';
 				echo '<input id="staffer_staff_email" name="staffer_staff_email" size="28" value="' . esc_attr($value) . '"><br>';
+				$value = get_post_meta($post->ID, 'staffer_staff_phone', true);
+				echo '<label for="staffer_staff_phone"><strong>Phone Number</strong></label>';
+				echo '<input id="staffer_staff_phone" name="staffer_staff_phone" size="28" value="' . esc_attr($value) . '"><br>';
 		}
 // saves the staffer post type details
 function staffer_staff_save_postdata($post_id) {
@@ -241,6 +297,7 @@ function staffer_staff_save_postdata($post_id) {
 				$linkedin = ($_POST['staffer_staff_linkedin']);
 				$website = ($_POST['staffer_staff_website']);
 				$email = ($_POST['staffer_staff_email']);
+				$phone = ($_POST['staffer_staff_phone']);
 				update_post_meta($post_ID, 'staffer_staff_title', $title);
 				update_post_meta($post_ID, 'staffer_staff_fb', $fb);
 				update_post_meta($post_ID, 'staffer_staff_gplus', $gplus);
@@ -248,15 +305,21 @@ function staffer_staff_save_postdata($post_id) {
 				update_post_meta($post_ID, 'staffer_staff_linkedin', $linkedin);
 				update_post_meta($post_ID, 'staffer_staff_website', $website);
 				update_post_meta($post_ID, 'staffer_staff_email', $email);
+				update_post_meta($post_ID, 'staffer_staff_phone', $phone);
 		}
 // sets template override for custom template use
 function staffer_staff_templates( $template ) {
     $post_types = array( 'staff' );
-    if ( is_post_type_archive( $post_types ) && ! file_exists( get_stylesheet_directory() . '/archive-staff.php' ) )
+    $staff_tax = 'department';
+    if ( is_post_type_archive( $post_types ) && ! file_exists( get_stylesheet_directory() . '/archive-staff.php' ) ) {
         $template = plugin_dir_path (__FILE__) . 'archive-staff.php';
-    if ( is_singular( $post_types ) && ! file_exists( get_stylesheet_directory() . '/single-staff.php' ) )
+    }
+    if ( is_singular( $post_types ) && ! file_exists( get_stylesheet_directory() . '/single-staff.php' ) ) {
         $template = plugin_dir_path (__FILE__) . 'single-staff.php';
-
+    }
+    if ( is_tax( $staff_tax ) && ! file_exists( get_stylesheet_directory() . '/taxonomy-staffer-department.php' ) ) {
+        $template = plugin_dir_path (__FILE__) . 'taxonomy-staffer-department.php';
+    }
     return $template;
 }
 add_filter( 'template_include', 'staffer_staff_templates' );
@@ -288,6 +351,7 @@ function staffer_activate() {
 	create_staff_cpt_staffer();
 	// flush rewrite rules to prevent 404s
 	flush_rewrite_rules();
+
 }
 register_activation_hook( __FILE__, 'staffer_activate' );
 
@@ -295,3 +359,50 @@ function staffer_deactivate() {
 	flush_rewrite_rules();
 }
 register_deactivation_hook( __FILE__, 'staffer_deactivate' );
+
+function staffer_thumbnail_check() {
+	if ( ! current_theme_supports ('post-thumbnails') ) {
+		add_theme_support ('post-thumbnails' );
+		}
+		}
+add_action ('after_setup_theme', 'staffer_thumbnail_check' );
+ 
+// adds link to main staff archive
+// too many people confused about accessing the page
+function staffer_admin_menu() {
+    global $submenu;
+    $url = home_url('/');
+    $stafferoptions = get_option('staffer');
+	if ( $stafferoptions['slug'] == '' ) {
+		$slug = 'staff';
+	} else {
+		$slug = $stafferoptions['slug'];
+	}
+	if ( get_option ('permalink_structure') ) {
+	$url = $url . $slug;
+	} else {
+		$url = $url . '?post_type=staff';
+	}
+    $submenu['edit.php?post_type=staff'][] = array(__('View Staff Page', 'staffer'), 'manage_options', $url);
+}
+add_action('admin_menu', 'staffer_admin_menu');
+
+// allows modification of posts per page without affecting non-staffer pages
+
+function staffer_per_page_mod($query) {
+	$stafferoptions = get_option ('staffer');
+	$perpage = $stafferoptions['perpage'];
+	$post_type = 'staff';
+	$taxonomy = 'department';
+		if ( $query->is_main_query() && !is_admin() && is_post_type_archive( $post_type ) ) {
+				$query->set( 'posts_per_page', $perpage );
+			} elseif ( $query->is_main_query() && !is_admin() && is_tax ($taxonomy) ) {
+				$query->set( 'posts_per_page', $perpage );
+		}
+
+	}
+	$stafferoptions = get_option ('staffer');
+	$perpage = $stafferoptions['perpage'];
+	if ($perpage != '' ) {
+		add_action ('pre_get_posts', 'staffer_per_page_mod' );
+	}

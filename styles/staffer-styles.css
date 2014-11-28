@@ -32,9 +32,16 @@ panel, and/or disable the default plugin stylesheet via the plugin options panel
 .staffer-staff-header {
 	margin: 20px;
 	}
-.staffer-staff-social-links  {
+.staffer-staff-social-links i {
 	font-size: 2rem;
 	padding: 15px;
+	}
+.staffer-staff-social-links span {
+	font-size: 1rem;
+	padding: 15px;
+	}
+.staffer-staff-social-links a.hide-link:hover {
+	cursor: default;
 	}
 .staff-content {
 	margin: 20px;
@@ -45,7 +52,7 @@ panel, and/or disable the default plugin stylesheet via the plugin options panel
 .staffer-archive-grid li {
 	list-style-type: none;
 	width: 31%;
-	display: inline-block;
+	display: inline-table;
 	}
 	
 @media screen and (max-width: 800px) {
