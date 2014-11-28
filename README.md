@@ -42,9 +42,11 @@ The ideal size, as shown in the plugin screenshots, is 250x200. However a variet
 
 You may seek community support within the WordPress.org forums. I will try to monitor and assist as needed. If you need immediate, hands-on, paid support, please contact me through my website: www.edwardrjenkins.com
 
-== Changelog ==
+<h4>Changelog</h4>
 = 1.3 =
+<br>
 = November 25, 2014 =
+<br>
 * fixed issue with permalinks not refreshing automatically
 * added full bio option
 * fixed blank breadcrumbs issue
@@ -55,10 +57,14 @@ You may seek community support within the WordPress.org forums. I will try to mo
 * added link to main page from admin menu
 * added taxonomy
 * removed sidebar option
+<br>
 = 1.2 =
+<br>
 = October 11, 2014 =
+<br>
 * fixes custom post type conflict
 = 1.1 =
+<br>
 = October 10, 2014 =
 * Moved register_post_type to activation hook
 * Added custom label field for proper title tag handling
@@ -67,12 +73,3 @@ You may seek community support within the WordPress.org forums. I will try to mo
 * Added built-in wrappers for most of top 20 popular WordPress themes
 = 1.0 =
 * Initial release
-
-== Upgrade Notice ==
-= 1.3 =
-Adds taxonomy, fixes permalink bugs
-Other misc. fixes.
-= 1.2 =
-Fixes custom post type conflict
-= 1.1 =
-Cleans up activation and adds new website field and custom labeling. Adds more built-in wrappers for better theme support.
