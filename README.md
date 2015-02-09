@@ -14,6 +14,33 @@ Staffer uses custom post types for staff/employee management, allowing users to 
 
 Frequently Asked Questions
 ==========================
+
+<h4>How Do I Use Staffer’s Shortcodes?</h4>
+
+There are two ways to use shortcodes: 1) standard method. 2) manual method.
+
+In the default method, you can use shortcodes while keeping Staffer’s archive pages enabled. If you want to use shortcodes exclusively, check the “Manual Method” option in the Staffer Options panel to disable the main “Staff” page.
+
+Follow this format for shortcodes:
+
+`[staffer]`
+
+The above example would output all of the staff listings in default order.
+
+To fine-tune, you can use parameters:
+
+`[staffer number="5" department="slug"]`
+
+In the above example, “number” refers to the number of entries to retrieve, and “department” refers to the department name slug. For instance, if you only wanted to show a list of members in department term with the “management” slug, you would pass “management” as a parameter.
+
+Other parameters include “order” and “orderby” — and all parameters are optional.
+
+Using the extra parameters, you could reorder the entries using WP_Query’s order and orderby parameters.
+
+For example, if you wanted to display 50 staff members, ordered by name alphabetically, you would do the following:
+
+`[staffer number="50" order="ASC" orderby="name"]`
+
 <h4>How Do I Set Up a Custom Template?</h4>
 
 Staffer uses two main templates: archive-staff.php and single-staff.php. If these files are present within your theme directory, Staffer will load your custom files rather than the plugin's default files. So, to create a custom template, you might start by copying archive-staff.php and single-staff.php into your theme's template. Then you could proceed to customize the template to your satisfaction. Some basic HTML/PHP skills will generally be needed for this. If you aren't comfortable with this, I suggest reaching out to a competent developer. I'm also available for paid support and customization, so please contact me through my website should you need assistance.

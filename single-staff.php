@@ -38,13 +38,21 @@
 				$pagetitle = 'Staff';
 			}
 		?>
-		<div class="staffer-breadcrumbs">
-			<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" itemprop="url"><?php _e ('Home', 'staffer'); ?></a> &#8250;
-				<a href="<?php echo esc_url ($basepageurl) ; ?>" itemprop="url"><?php echo $pagetitle; ?></a> &#8250;
-				<span itemprop="title"><?php the_title(); ?></span>
+
+		<?php
+			// checks for manual mode
+			// does not display breadcrumb trail in manual mode
+			if ( ! isset ( $stafferoptions['manual_mode'] ) ) { ?>
+			<div class="staffer-breadcrumbs">
+				<div itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" itemprop="url"><?php _e ('Home', 'staffer'); ?></a> &#8250;
+					<a href="<?php echo esc_url ($basepageurl) ; ?>" itemprop="url"><?php echo $pagetitle; ?></a> &#8250;
+					<span itemprop="title"><?php the_title(); ?></span>
+				</div>
 			</div>
-		</div>
+
+		<?php } ?>
+		
 		<?php 
 			echo '<h2>';
 			echo the_title();

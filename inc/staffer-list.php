@@ -40,7 +40,13 @@ $stafferoptions = get_option('staffer');
 				
 				</header>
 					<div class="staff-content">
-					<?php the_post_thumbnail ( 'medium', array ('class' => 'alignleft') );
+					<?php
+						if ( has_post_thumbnail() ) { ?>
+							<a href="<?php the_permalink(); ?>">
+								<?php the_post_thumbnail ( 'medium', array ('class' => 'alignleft') ); ?>
+							</a>
+							<?php
+						}
 						if ($stafferoptions['estyle'] == null or $stafferoptions['estyle'] == 'excerpt' ) {
 							the_excerpt();
 						} elseif ($stafferoptions['estyle'] == 'full' ) {

@@ -33,6 +33,6 @@ $currenttemplate = get_option( 'template' );
 				echo '<div class="wrap contentclass" role="document">';
 				break;
 			default :
-				echo '<div id="staffer-container"><div id="content" role="main">';
+				echo '<div id="staffer-container"><div id="staffer-content" role="main">';
 				break;
 		}
