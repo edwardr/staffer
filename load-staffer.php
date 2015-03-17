@@ -183,12 +183,26 @@ function staffer_taxonomy () {
 	}
 	$taxslug = $stafferslug . '/department';
 
+	$department_labels = array(
+		'name'              => _x( 'Departments', 'taxonomy general name', 'staffer' ),
+		'singular_name'     => _x( 'Department', 'taxonomy singular name', 'staffer' ),
+		'search_items'      => __( 'Search Departments', 'staffer' ),
+		'all_items'         => __( 'All Departments', 'staffer' ),
+		'parent_item'       => __( 'Parent Department', 'staffer' ),
+		'parent_item_colon' => __( 'Parent Department:', 'staffer' ),
+		'edit_item'         => __( 'Edit Department', 'staffer' ),
+		'update_item'       => __( 'Update Department', 'staffer' ),
+		'add_new_item'      => __( 'Add New Department', 'staffer' ),
+		'new_item_name'     => __( 'New Department Name', 'staffer' ),
+		'menu_name'         => __( 'Departments', 'staffer' ),
+	);
+
 	register_taxonomy(
 		'department',
 		'staff',
 		array(
 			'hierarchical' => true,
-			'label' => __( 'Departments' ),
+			'labels' => $department_labels,
 			'rewrite' => array( 'slug' => $taxslug, 'hierarchical' => true),
 			'query_var'    => 'department',
 			'public' => true,
