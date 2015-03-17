@@ -206,6 +206,7 @@ function staffer_taxonomy () {
 			'rewrite' => array( 'slug' => $taxslug, 'hierarchical' => true),
 			'query_var'    => 'department',
 			'public' => true,
+			'show_admin_column' => true,
 		)
 	);
 	}
