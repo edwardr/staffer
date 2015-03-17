@@ -218,15 +218,15 @@ function create_staff_cpt_staffer() {
 	$stafferslug = $stafferoptions['slug'];
 	// fixes title tag issue and adds label option
 	if ( !empty ($stafferoptions['label'] ) ) {
-	$stafferlabel = $stafferoptions['label'];
+		$stafferlabel = $stafferoptions['label'];
 	} else {
-	$stafferlabel = 'Staff';
+		$stafferlabel = 'Staff';
 	}
 	$rewrite = array(
-	'slug'                => $stafferslug,
-	'with_front'          => true,
-	'pages'               => true,
-	'feeds'               => true,
+		'slug'                => $stafferslug,
+		'with_front'          => true,
+		'pages'               => true,
+		'feeds'               => true,
 	);
 
 	if ( isset( $stafferoptions['manual_mode'] ) ) {
@@ -237,16 +237,16 @@ function create_staff_cpt_staffer() {
 	register_post_type('staff', array(
 		'labels' => array(
 		'name' => $stafferlabel,
-		// future release 'taxonomy' => 'department',
-		'singular_name' => __('Staff Member'),
-		'add_new_item' => __('Add New Staff Member'),
-		'edit_item' => 'Edit Staff Member',
-		'new_item' => 'New Staff Member',
-		'all_items' => 'All Staff Members',
-		'view_item' => 'View Staff Member',
-		'search_items' => 'Search Staff Members',
-		'not_found' => 'No Staff Members Found',
-		'not_found_in_trash' => 'No Staff Members in Trash',
+		'taxonomy' => 'department',
+			'singular_name' => __( 'Staff Member', 'staffer' ),
+			'add_new_item' => __( 'Add New Staff Member', 'staffer' ),
+			'edit_item' => __( 'Edit Staff Member', 'staffer' ),
+			'new_item' => __( 'New Staff Member', 'staffer' ),
+			'all_items' => __( 'All Staff Members', 'staffer' ),
+			'view_item' => __( 'View Staff Member', 'staffer' ),
+			'search_items' => __( 'Search Staff Members', 'staffer' ),
+			'not_found' => __( 'No Staff Members Found', 'staffer' ),
+			'not_found_in_trash' => __( 'No Staff Members in Trash', 'staffer' ),
 		),
 		'public' => true,
 		'has_archive' => $archive,
@@ -262,8 +262,9 @@ function create_staff_cpt_staffer() {
 			'thumbnail',
 			'excerpt'
 			)
-			));
-			}
+		)
+	);
+}
 add_action ('init', 'create_staff_cpt_staffer' );
 
 // adds meta box to member post types
