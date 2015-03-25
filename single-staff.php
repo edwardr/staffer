@@ -80,35 +80,33 @@
 	<?php
 	// social + contact links
 	if ( get_post_meta ($post->ID,'staffer_staff_fb', true) != '' ) { ?>
-		<a href="<?php echo get_post_meta ($post->ID,'staffer_staff_fb', true); ?>" target="_blank">
-			<i class="fa fa-facebook fa-fw"></i></a>
+		<a href="<?php echo esc_url( get_post_meta ($post->ID,'staffer_staff_fb', true) ); ?>" target="_blank">
+			<i class="fa fa-facebook fa-fw"></i><span class="screen-reader-text">Facebook profile for <?php the_title(); ?></span></a>
 	<?php 
 		}
 	if ( get_post_meta ($post->ID,'staffer_staff_gplus', true) != '' ) { ?>
-		<a href="<?php echo get_post_meta ($post->ID,'staffer_staff_gplus', true); ?>" target="_blank">
-			<i class="fa fa-google-plus fa-fw"></i></a>
+		<a href="<?php echo esc_url( get_post_meta ($post->ID,'staffer_staff_gplus', true) ); ?>" target="_blank">
+			<i class="fa fa-google-plus fa-fw"></i><span class="screen-reader-text">Google+ for <?php the_title(); ?></span></a>
 	<?php }
 	if ( get_post_meta ($post->ID,'staffer_staff_twitter', true) != '' ) { ?>
-		<a href="<?php echo get_post_meta ($post->ID,'staffer_staff_twitter', true); ?>" target="_blank">
-			<i class="fa fa-twitter fa-fw"></i></a>
+		<a href="<?php echo esc_url( get_post_meta ($post->ID,'staffer_staff_twitter', true) ); ?>" target="_blank">
+			<i class="fa fa-twitter fa-fw"></i><span class="screen-reader-text">Twitter account for <?php the_title(); ?></span></a>
 	<?php }
 	if ( get_post_meta ($post->ID,'staffer_staff_linkedin', true) != '' ) { ?>
-		<a href="<?php echo get_post_meta ($post->ID,'staffer_staff_linkedin', true); ?>" target="_blank">
-			<i class="fa fa-linkedin fa-fw"></i></a>
+		<a href="<?php echo esc_url( get_post_meta ($post->ID,'staffer_staff_linkedin', true) ); ?>" target="_blank">
+			<i class="fa fa-linkedin fa-fw"></i><span class="screen-reader-text">LinkedIn profile for <?php the_title(); ?></span></a>
 	<?php }
 	if ( get_post_meta ($post->ID,'staffer_staff_email', true) != '' ) {
 		$email = get_post_meta ($post->ID,'staffer_staff_email', true); ?>
-		<a href="mailto:<?php echo antispambot($email);?>?Subject=<?php _e ('Contact from ', 'staffer'); ?><?php bloginfo('name'); ?>" target="_blank">
-			<i class="fa fa-envelope fa-fw"></i></a>
+		<a href="mailto:<?php echo antispambot( $email );?>?Subject=<?php _e ('Contact from ', 'staffer'); ?><?php bloginfo('name'); ?>" target="_blank">
+			<i class="fa fa-envelope fa-fw"></i><span class="screen-reader-text"><?php echo antispambot($email); ?></span></a>
 	<?php }
-	if ( get_post_meta ($post->ID,'staffer_staff_website', true) != '' ) {
-		$website = get_post_meta ($post->ID,'staffer_staff_website', true); ?>
-		<a href="<?php echo get_post_meta ($post->ID,'staffer_staff_website', true); ?>" target="_blank">
-			<i class="fa fa-user fa-fw"></i></a>
+	if ( get_post_meta ($post->ID,'staffer_staff_website', true) != '' ) { ?>
+		<a href="<?php echo esc_url( get_post_meta ($post->ID,'staffer_staff_website', true) ); ?>" target="_blank">
+			<i class="fa fa-user fa-fw"></i><span class="screen-reader-text">Website for <?php the_title(); ?></span></a>
 	<?php }
-	if ( get_post_meta ($post->ID,'staffer_staff_phone', true) != '' ) {
-		$phone = get_post_meta ($post->ID,'staffer_staff_phone', true); ?>
-			<span><?php echo get_post_meta ($post->ID,'staffer_staff_phone', true); ?></span>
+	if ( get_post_meta ($post->ID,'staffer_staff_phone', true) != '' ) { ?>
+			<span><span class="screen-reader-text">Phone for <?php the_title(); ?>: </span><?php echo esc_html( get_post_meta ($post->ID,'staffer_staff_phone', true) ); ?></span>
 	<?php }
 	?>
 	</div>
