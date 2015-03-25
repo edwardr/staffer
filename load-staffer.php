@@ -243,7 +243,6 @@ function create_staff_cpt_staffer() {
 			'title',
 			'editor',
 			'revisions',
-			'custom-fields',
 			'thumbnail',
 			'excerpt'
 			)
