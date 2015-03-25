@@ -209,7 +209,7 @@ function create_staff_cpt_staffer() {
 	}
 	$rewrite = array(
 	'slug'                => $stafferslug,
-	'with_front'          => true,
+	'with_front'          => (bool) apply_filters( 'staffer_with_front', true ),
 	'pages'               => true,
 	'feeds'               => true,
 	);
