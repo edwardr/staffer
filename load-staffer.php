@@ -440,80 +440,82 @@ if ($perpage != '' ) {
 }
 
 // adds staff shortcode
-function staffer_shortcode( $atts ) {
-	ob_start();
-	extract( shortcode_atts( array (
-		'order' => 'DESC',
-		'orderby' => 'date',
-		'number' => -1,
-		'department' => '',
-	), $atts ) );
+if( !function_exists( 'staffer_shortcode' ) ) {
+	function staffer_shortcode( $atts ) {
+		ob_start();
+		extract( shortcode_atts( array (
+			'order' => 'DESC',
+			'orderby' => 'date',
+			'number' => -1,
+			'department' => '',
+		), $atts ) );
 
-	if ( $department != '' ) { 
-		$tax_query = array ( 
-			array (
-				'taxonomy'	=> 'department',
-				'field'		=> 'slug',
-				'terms'		=> $department,
-				),
-			);
-	} else {
-		$tax_query = null;
-	}
-	$args = array(
-		'post_type' => 'staff',
-		'order' => $order,
-		'orderby' => $orderby,
-		'posts_per_page' => $number,
-		'tax_query' => $tax_query,
-	);
-	$staff_query = new WP_Query( $args );
-	if ( $staff_query->have_posts() ) { 
-		global $post;
-		$stafferoptions = get_option ( 'staffer' );
+		if ( $department != '' ) { 
+			$tax_query = array ( 
+				array (
+					'taxonomy'	=> 'department',
+					'field'		=> 'slug',
+					'terms'		=> $department,
+					),
+				);
+		} else {
+			$tax_query = null;
+		}
+		$args = array(
+			'post_type' => 'staff',
+			'order' => $order,
+			'orderby' => $orderby,
+			'posts_per_page' => $number,
+			'tax_query' => $tax_query,
+		);
+		$staff_query = new WP_Query( $args );
+		if ( $staff_query->have_posts() ) { 
+			global $post;
+			$stafferoptions = get_option ( 'staffer' );
 
-	if (isset ($stafferoptions['gridlayout']) ) { ?>
-		<ul class="staffer-archive-grid">
-			<?php } else { ?>
-				<ul class="staffer-archive-list">
-				<?php }
+		if (isset ($stafferoptions['gridlayout']) ) { ?>
+			<ul class="staffer-archive-grid">
+				<?php } else { ?>
+					<ul class="staffer-archive-list">
+					<?php }
 
-			while ( $staff_query->have_posts() ) : $staff_query->the_post(); ?>
-			<li>
-				<header class="staffer-staff-header">
-				<h3 class="staffer-staff-title"><a href="<?php the_permalink(); ?>">
-					<?php echo the_title(); ?>
-					</a>
-				</h3>
-				<?php
-				if ( get_post_meta ($post->ID,'staffer_staff_title', true) != '' ) {
-					echo '<em>';
-					echo get_post_meta ($post->ID,'staffer_staff_title', true) . '</em><br>';
-					}
-					?>
-				
-				</header>
-					<div class="staff-content">
-				<?php if (isset ($stafferoptions['gridlayout']) ) { ?>
-					<?php the_post_thumbnail ( 'medium', array ('class' => 'aligncenter') ); ?>
-						<?php } else { ?>
-						<?php the_post_thumbnail ( 'medium', array ('class' => 'alignleft') ); ?>
-						<?php }
-						if ($stafferoptions['estyle'] == null or $stafferoptions['estyle'] == 'excerpt' ) {
-							the_excerpt();
-						} elseif ($stafferoptions['estyle'] == 'full' ) {
-							the_content();
-						} elseif ($stafferoptions['estyle'] == 'none' ) {
-							// nothing to see here
-						} 
+				while ( $staff_query->have_posts() ) : $staff_query->the_post(); ?>
+				<li>
+					<header class="staffer-staff-header">
+					<h3 class="staffer-staff-title"><a href="<?php the_permalink(); ?>">
+						<?php echo the_title(); ?>
+						</a>
+					</h3>
+					<?php
+					if ( get_post_meta ($post->ID,'staffer_staff_title', true) != '' ) {
+						echo '<em>';
+						echo get_post_meta ($post->ID,'staffer_staff_title', true) . '</em><br>';
+						}
 						?>
-					</div>
-				</li>
-			<?php endwhile;
-			wp_reset_postdata(); ?>
-		</ul>
-	<?php $output = ob_get_clean();
-	return $output;
-	}	
+					
+					</header>
+						<div class="staff-content">
+					<?php if (isset ($stafferoptions['gridlayout']) ) { ?>
+						<?php the_post_thumbnail ( 'medium', array ('class' => 'aligncenter') ); ?>
+							<?php } else { ?>
+							<?php the_post_thumbnail ( 'medium', array ('class' => 'alignleft') ); ?>
+							<?php }
+							if ($stafferoptions['estyle'] == null or $stafferoptions['estyle'] == 'excerpt' ) {
+								the_excerpt();
+							} elseif ($stafferoptions['estyle'] == 'full' ) {
+								the_content();
+							} elseif ($stafferoptions['estyle'] == 'none' ) {
+								// nothing to see here
+							} 
+							?>
+						</div>
+					</li>
+				<?php endwhile;
+				wp_reset_postdata(); ?>
+			</ul>
+		<?php $output = ob_get_clean();
+		return $output;
+		}	
+	}
 }
 add_shortcode( 'staffer', 'staffer_shortcode' );
