@@ -269,28 +269,28 @@ function staffer_staff_role_box($post) {
 	// Use get_post_meta to retrieve an existing value from the database and use the value for the form
 	$value = get_post_meta($post->ID, 'staffer_staff_title', true);
 	echo '<label for="staffer_staff_title"><strong>Title</strong></label>';
-	echo '<input id="staffer_staff_title" name="staffer_staff_title" size="28" value="' . esc_attr($value) . '"><br>';
+	echo '<input id="staffer_staff_title" name="staffer_staff_title" type="text" value="' . esc_attr($value) . '"><br>';
 	$value = get_post_meta($post->ID, 'staffer_staff_fb', true);
 	echo '<label for="staffer_staff_fb"><strong>Facebook</strong></label>';
-	echo '<input id="staffer_staff_fb" name="staffer_staff_fb" size="28" value="' . esc_attr($value) . '"><br>';
+	echo '<input id="staffer_staff_fb" name="staffer_staff_fb" type="text" value="' . esc_attr($value) . '"><br>';
 	$value = get_post_meta($post->ID, 'staffer_staff_gplus', true);
 	echo '<label for="staffer_staff_gplus"><strong>Google+</strong></label>';
-	echo '<input id="staffer_staff_gplus" name="staffer_staff_gplus" size="28" value="' . esc_attr($value) . '"><br>';
+	echo '<input id="staffer_staff_gplus" name="staffer_staff_gplus" type="text" value="' . esc_attr($value) . '"><br>';
 	$value = get_post_meta($post->ID, 'staffer_staff_twitter', true);
 	echo '<label for="staffer_staff_twitter"><strong>Twitter</strong></label>';
-	echo '<input id="staffer_staff_twitter" name="staffer_staff_twitter" size="28" value="' . esc_attr($value) . '"><br>';
+	echo '<input id="staffer_staff_twitter" name="staffer_staff_twitter" type="text" value="' . esc_attr($value) . '"><br>';
 	$value = get_post_meta($post->ID, 'staffer_staff_linkedin', true);
 	echo '<label for="staffer_staff_linkedin"><strong>LinkedIn</strong></label>';
-	echo '<input id="staffer_staff_linkedin" name="staffer_staff_linkedin" size="28" value="' . esc_attr($value) . '"><br>';
+	echo '<input id="staffer_staff_linkedin" name="staffer_staff_linkedin" type="text" value="' . esc_attr($value) . '"><br>';
 	$value = get_post_meta($post->ID, 'staffer_staff_website', true);
 	echo '<label for="staffer_staff_website"><strong>Website</strong></label>';
-	echo '<input id="staffer_staff_website" name="staffer_staff_website" size="28" value="' . esc_attr($value) . '"><br>';
+	echo '<input id="staffer_staff_website" name="staffer_staff_website" type="text" value="' . esc_attr($value) . '"><br>';
 	$value = get_post_meta($post->ID, 'staffer_staff_email', true);
 	echo '<label for="staffer_staff_email"><strong>Email</strong></label>';
-	echo '<input id="staffer_staff_email" name="staffer_staff_email" size="28" value="' . esc_attr($value) . '"><br>';
+	echo '<input id="staffer_staff_email" name="staffer_staff_email" type="text" value="' . esc_attr($value) . '"><br>';
 	$value = get_post_meta($post->ID, 'staffer_staff_phone', true);
 	echo '<label for="staffer_staff_phone"><strong>Phone Number</strong></label>';
-	echo '<input id="staffer_staff_phone" name="staffer_staff_phone" size="28" value="' . esc_attr($value) . '"><br>';
+	echo '<input id="staffer_staff_phone" name="staffer_staff_phone" type="text" value="' . esc_attr($value) . '"><br>';
 		}
 // saves the staffer post type details
 function staffer_staff_save_postdata($post_id) {
