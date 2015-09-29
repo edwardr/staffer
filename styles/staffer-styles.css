@@ -71,3 +71,7 @@ ul.staffer-archive-list {
 	list-style-type: none;
 	display: inline-block;
 	}
+
+#staffer-author-posts {
+	margin: 20px;
+}	
