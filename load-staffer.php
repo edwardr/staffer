@@ -530,7 +530,6 @@ function staffer_sync_profile( $post_id ) {
 			'user_url'          => $website,
 			'first_name'        => $first_name,
 			'last_name'         => $last_name,
-			'description'       => $post->post_content,
 			'synced_staffer_id' => $post_id,
 		);
 
