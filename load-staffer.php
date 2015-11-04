@@ -506,7 +506,6 @@ function staffer_sync_profile( $post_id ) {
 	$synced_wp_profile       = isset( $_POST['staffer_synced_wp_profile'] ) ? ( $_POST['staffer_synced_wp_profile'] ) : 0;
 
 	if ( ! empty( $wp_profile_sync_enabled ) && ( $synced_wp_profile > 0 ) ) {
-
 		$post = get_post( $post_id );
 
 		// Get the First Name & Last Name from the Team Member's Post Title
@@ -525,13 +524,15 @@ function staffer_sync_profile( $post_id ) {
 
 		$website = ( $_POST['staffer_staff_website'] );
 
-		$user_data = array(
-			'ID'                => $synced_wp_profile,
-			'user_url'          => $website,
-			'first_name'        => $first_name,
-			'last_name'         => $last_name,
-			'synced_staffer_id' => $post_id,
+		$user_data    = array(
+			'ID'         => $synced_wp_profile,
+			'user_url'   => $website,
+			'first_name' => $first_name,
+			'last_name'  => $last_name,
 		);
+		$user_updated = wp_update_user( $user_data );
+
+		update_user_meta( $synced_wp_profile, 'synced_staffer_id', $post_id );
 
 		// Sync the extra social links.
 		if ( function_exists( 'axl_update_contactmethods' ) ) {
@@ -543,13 +544,12 @@ function staffer_sync_profile( $post_id ) {
 			if ( $matched ) {
 				$twitter = $matches[3];
 			}
-			$user_data['googleplus'] = $gplus;
-			$user_data['twitter']    = $twitter;
-			$user_data['facebook']   = $facebook;
-			$user_data['linkedin']   = $linkedin;
-		}
 
-		$user_updated = wp_update_user( $user_data );
+			update_user_meta( $synced_wp_profile, 'googleplus', $gplus );
+			update_user_meta( $synced_wp_profile, 'twitter', $twitter );
+			update_user_meta( $synced_wp_profile, 'facebook', $facebook );
+			update_user_meta( $synced_wp_profile, 'linkedin', $linkedin );
+		}
 	} else if ( $synced_wp_profile > 0 ) {
 		// Simply store the post_id in synced user's meta to override author link.
 		update_user_meta( $synced_wp_profile, 'synced_staffer_id', $post_id );
