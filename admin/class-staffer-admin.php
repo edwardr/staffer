@@ -65,7 +65,7 @@ class Staffer_Admin {
 			__('Profile Details', 'staffer'),
 			array( $this, 'staffer_meta_callback' ),
 			'staff',
-			'side',
+			'normal',
 			'high'
 		);
 
@@ -102,65 +102,65 @@ class Staffer_Admin {
 			$field_values[$k] = $v;
 		}
 
-		echo '<label for="staffer_id">
+		echo '<p><label for="staffer_id">
 						<strong>' . __('Staff ID', 'staffer' ) . '</strong>
 						<input type="text" id="staffer_id" name="staffer_id" class="widefat" value="' . $post->ID . '" disabled>
-					</label>';
+					</label></p>';
 
-		echo '<label for="staffer_staff_title">
+		echo '<p><label for="staffer_staff_title">
 						<strong>' . __('Title', 'staffer' ) . '</strong>
 						<input type="text" id="staffer_staff_title" name="staffer_staff_title" class="widefat" value="' . $field_values['staffer_staff_title'] . '">
-					</label>';
+					</label></p>';
 
-		echo '<label for="staffer_staff_fb">
+		echo '<p><label for="staffer_staff_fb">
 						<strong>' . __('Facebook', 'staffer' ) . '</strong>
 						<input type="url" id="staffer_staff_fb" name="staffer_staff_fb" class="widefat" value="' . $field_values['staffer_staff_fb'] . '">
-					</label>';
+					</label></p>';
 
-		echo '<label for="staffer_staff_gplus">
+		echo '<p><label for="staffer_staff_gplus">
 						<strong>' . __('Google+', 'staffer' ) . '</strong>
 						<input type="url" id="staffer_staff_gplus" name="staffer_staff_gplus" class="widefat" value="' . $field_values['staffer_staff_gplus'] . '">
-					</label>';
+					</label></p>';
 
-		echo '<label for="staffer_staff_twitter">
+		echo '<p><label for="staffer_staff_twitter">
 						<strong>' . __('Twitter', 'staffer' ) . '</strong>
 						<input type="url" id="staffer_staff_twitter" name="staffer_staff_twitter" class="widefat" value="' . $field_values['staffer_staff_twitter'] . '">
-					</label>';
+					</label></p>';
 
-		echo '<label for="staffer_staff_linkedin">
+		echo '<p><label for="staffer_staff_linkedin">
 						<strong>' . __('LinkedIn', 'staffer' ) . '</strong>
 						<input type="url" id="staffer_staff_linkedin" name="staffer_staff_linkedin" class="widefat" value="' . $field_values['staffer_staff_linkedin'] . '">
-					</label>';
+					</label></p>';
 
-		echo '<label for="staffer_staff_instagram">
+		echo '<p><label for="staffer_staff_instagram">
 						<strong>' . __('Instagram', 'staffer' ) . '</strong>
 						<input type="url" id="staffer_staff_instagram" name="staffer_staff_instagram" class="widefat" value="' . $field_values['staffer_staff_instagram'] . '">
-					</label>';
+					</label></p>';
 
-		echo '<label for="staffer_staff_youtube">
+		echo '<p><label for="staffer_staff_youtube">
 						<strong>' . __('YouTube', 'staffer' ) . '</strong>
 						<input type="url" id="staffer_staff_youtube" name="staffer_staff_youtube" class="widefat" value="' . $field_values['staffer_staff_youtube'] . '">
-					</label>';
+					</label></p>';
 
-		echo '<label for="staffer_staff_github">
+		echo '<p><label for="staffer_staff_github">
 						<strong>' . __('Github', 'staffer' ) . '</strong>
 						<input type="url" id="staffer_staff_github" name="staffer_staff_github" class="widefat" value="' . $field_values['staffer_staff_github'] . '">
-					</label>';
+					</label></p>';
 
-		echo '<label for="staffer_staff_website">
+		echo '<p><label for="staffer_staff_website">
 						<strong>' . __('Website', 'staffer' ) . '</strong>
 						<input type="url" id="staffer_staff_website" name="staffer_staff_website" class="widefat" value="' . $field_values['staffer_staff_website'] . '">
-					</label>';
+					</label></p>';
 
-		echo '<label for="staffer_staff_email">
+		echo '<p><label for="staffer_staff_email">
 						<strong>' . __('Email', 'staffer' ) . '</strong>
 						<input type="email" id="staffer_staff_email" name="staffer_staff_email" class="widefat" value="' . $field_values['staffer_staff_email'] . '">
-					</label>';
+					</label></p>';
 
-			echo '<label for="staffer_staff_phone">
+			echo '<p><label for="staffer_staff_phone">
 						<strong>' . __('Phone Number', 'staffer' ) . '</strong>
 						<input type="tel" id="staffer_staff_phone" name="staffer_staff_phone" class="widefat" value="' . $field_values['staffer_staff_phone'] . '">
-					</label>';
+					</label></p>';
 
 	}
 

@@ -1,114 +1,117 @@
-=== Plugin Name ===
-Contributors: (this should be a list of wordpress.org userid's)
+=== Staffer ===
+Contributors: wpnook
+Tags: staff, staff directory, profile, business
 Donate link: https://codewrangler.io
-Tags: comments, spam
-Requires at least: 3.0.1
-Tested up to: 3.4
-Stable tag: 4.3
+Requires at least: 3.5
+Tested up to: 4.8.2
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
+Staff management for WordPress.
 
 == Description ==
-
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
-
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
-
-A few notes about the sections above:
-
-*   "Contributors" is a comma separated list of wp.org/wp-plugins.org usernames
-*   "Tags" is a comma separated list of tags that apply to the plugin
-*   "Requires at least" is the lowest version that the plugin will work on
-*   "Tested up to" is the highest version that you've *successfully used to test the plugin*. Note that it might work on
-higher versions... this is just the highest one you've verified.
-*   Stable tag should indicate the Subversion "tag" of the latest stable version, or "trunk," if you use `/trunk/` for
-stable.
-
-    Note that the `readme.txt` of the stable tag is the one that is considered the defining one for the plugin, so
-if the `/trunk/readme.txt` file says that the stable tag is `4.3`, then it is `/tags/4.3/readme.txt` that'll be used
-for displaying information about the plugin.  In this situation, the only thing considered from the trunk `readme.txt`
-is the stable tag pointer.  Thus, if you develop in trunk, you can update the trunk `readme.txt` to reflect changes in
-your in-development version, without having that information incorrectly disclosed about the current stable version
-that lacks those changes -- as long as the trunk's `readme.txt` points to the correct stable tag.
-
-    If no stable tag is provided, it is assumed that trunk is stable, but you should specify "trunk" if that's where
-you put the stable version, in order to eliminate any doubt.
+Staffer uses custom post types for staff/employee management, allowing users to easily create and manage an onsite staff directory, and is built in a way to be compatible with essentionally any theme. Staffer also supports the display of staff members via a shortcode.
 
 == Installation ==
-
-This section describes how to install the plugin and get it working.
-
-e.g.
-
-1. Upload `staffer.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+1. Upload the \'staffer\' folder to the `/wp-content/plugins/` directory
+2. Activate the plugin through the \'Plugins\' menu in WordPress
+3. Visit the Settings panel to set up Staffer.
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= How Do I Use Staffer's Shortcodes? =
 
-An answer to that question.
+Follow this format for shortcodes:
 
-= What about foo bar? =
+[staffer]
 
-Answer to foo bar dilemma.
+The above example would output all of the staff listings in default order.
+
+To fine-tune, you can use parameters:
+
+[staffer number="5" department="slug" layout="grid"]
+
+In the above example, “number” refers to the number of entries to retrieve, and “department” refers to the department name slug. For instance, if you only wanted to show a list of members in department term with the “management” slug, you would pass “management” as a parameter. Layout can be either `grid` or `list`.
+
+Other parameters include “order” and “orderby” — and all parameters are optional.
+
+Using the extra parameters, you could reorder the entries using WP_Query’s order and orderby parameters.
+
+For example, if you wanted to display 50 staff members, ordered by name alphabetically, you would do the following:
+
+[staffer number="50" order="ASC" orderby="name"]
+
+= How Can I Set the Order of Staff Profiles? =
+
+For now, use a custom ordering plugin, such as Post Types Order, available in the WordPress plugin repository. I plan on adding this functionality to Staffer in the future.
+
+= What Size Should the Staff Images Be? =
+
+When you upload an image, a custom thumbnail for Staffer is automatically generated, so feel free to use any image size for your Staff profiles.
+
+= Where Can I Get Support? =
+
+You may seek community support within the WordPress.org forums. I will try to monitor and assist as needed. If you need immediate, hands-on, paid support, please contact me @ https://codewrangler.io
 
 == Screenshots ==
-
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+1. Staffer options panel
+2. Staffer archive page
+3. Staffer single profile
+4. Staff profile editor
 
 == Changelog ==
-
+= 2.0.0 =
+= September 21, 2017 =
+* Complete rebuild to be object-oriented
+* Simplified display/template process
+* Incorporates staff archives with default page template system
+* Introduces modal for single-staff profile display
+* Switch to flexbox styles for consistent grid display
+* Migration to SASS
+= 1.3.3 =
+= February 8, 2015 =
+* added manual mode option
+* adding shortcode support
+* added thumb archive link
+* fix for overflowing content wrappers
+= 1.3.1 =
+= December 10, 2014 =
+* fixed department slug 404 issue
+= 1.3 =
+= November 25, 2014 =
+* fixed issue with permalinks not refreshing automatically
+* added full bio option
+* fixed blank breadcrumbs issue
+* added phone number field
+* added German and Spanish translations
+* fixed post per page issue
+* fixed issue when pretty permalinks are disabled
+* added link to main page from admin menu
+* added taxonomy
+* removed sidebar option
+= 1.2 =
+= October 11, 2014 =
+* fixes custom post type conflict
+= 1.1 =
+= October 10, 2014 =
+* Moved register_post_type to activation hook
+* Added custom label field for proper title tag handling
+* Added website field to profiles
+* Changed <section> to <div> in single-staff.php for validation
+* Added built-in wrappers for most of top 20 popular WordPress themes
 = 1.0 =
-* A change since the previous version.
-* Another change.
-
-= 0.5 =
-* List versions from most recent at top to oldest at bottom.
+* Initial release
 
 == Upgrade Notice ==
-
-= 1.0 =
-Upgrade notices describe the reason a user should upgrade.  No more than 300 characters.
-
-= 0.5 =
-This version fixes a security related bug.  Upgrade immediately.
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
-
-== A brief Markdown Example ==
-
-Ordered list:
-
-1. Some feature
-1. Another feature
-1. Something else about the plugin
-
-Unordered list:
-
-* something
-* something else
-* third thing
-
-Here's a link to [WordPress](http://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
-Titles are optional, naturally.
-
-[markdown syntax]: http://daringfireball.net/projects/markdown/syntax
-            "Markdown is what the parser uses to process much of the readme file"
-
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up  for **strong**.
-
-`<?php code(); // goes in backticks ?>`
+= 2.0.0 =
+This is a complete rebuild of Staffer.
+= 1.3.3=
+Adds shortcode option
+= 1.3 =
+Adds taxonomy, fixes permalink bugs
+Other misc. fixes.
+= 1.2 =
+Fixes custom post type conflict
+= 1.1 =
+Cleans up activation and adds new website field and custom labeling. Adds more built-in wrappers for better theme support.

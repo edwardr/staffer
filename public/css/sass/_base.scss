@@ -39,6 +39,7 @@ ul.staffer-archive-list {
 .staff-li a:active,
 .staff-li a:focus {
 	text-decoration: none!important;
+	box-shadow: none!important;
 }
 
 ul.staffer-archive-grid h3.staffer-staff-title,
@@ -46,6 +47,7 @@ ul.staffer-archive-list h3.staffer-staff-title {
 	font-size: initial!important;
 	margin: initial!important;
 	padding: initial!important;
+	clear: initial!important;
 }
 
 ul.staffer-archive-grid h3.staffer-staff-title,
@@ -96,6 +98,7 @@ ul.staffer-archive-grid .staff-content .social-icons a {
 	display: inline-block;
 	width: 20px;
 	margin-right: 5px;
+	display: inline;
 }
 
 .staff-content img.staffer-list-image {
@@ -124,7 +127,7 @@ ul.staffer-archive-list li {
 	color: #222;
 	overflow: auto;
 	margin: 0 auto;
-
+	border: 1px solid rgb(26, 26, 26);
 	/*width: 50%;*/
 	height: 80vh;
 	margin: 1% auto;
@@ -133,10 +136,14 @@ ul.staffer-archive-list li {
 	top: 10%;
 }
 
+.cw-staffer-modal a {
+	box-shadow: none!important;
+}
+
 .cw-staffer-modal .cw-modal-inner {
-	width: 100%;
+	width: 95%;
 	margin: 0 auto;
-	padding: 35px;
+	padding: 20px;
 }
 
 .cw-staffer-modal .cw-modal-close {
@@ -160,12 +167,13 @@ ul.staffer-archive-list li {
 	box-sizing: border-box;
 	background: inherit;
 	color: inherit;
-	padding: 3px;
+	padding: 3px 0;
 }
 
 .cw-staffer-modal img.staffer-social-icon {
 	width: 20px;
-	margin-right: 5px;
+	margin-right: 10px;
+	display: inline;
 }
 
 .cw-staffer-modal .staffer-website-link {
@@ -177,11 +185,13 @@ ul.staffer-archive-list li {
 .cw-staffer-modal p {
 	font-size: initial!important;
 	text-transform: none;
+	margin: 10px 0!important;
 }
 
 .staffer-archive-list img.staffer-social-icon {
 	width: 20px;
-	margin-right: 5px;
+	margin-right: 10px;
+	display: inline;
 }
 
 body.cw-staffer-overlay,

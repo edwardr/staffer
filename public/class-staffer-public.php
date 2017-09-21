@@ -131,12 +131,9 @@ class Staffer_Public {
 			'staff',
 			array(
 				'hierarchical' => true,
-				'label' => __( 'Departments' ),
-				'rewrite' => array(
-					'slug' => $options['staffer_slug'] . '/department',
-					'hierarchical' => true,
-					),
-				'public' => true,
+				'label' => __( 'Departments', 'staffer' ),
+				'public' => false,
+				'show_ui' => true,
 			)
 		);
 
@@ -362,17 +359,17 @@ class Staffer_Public {
 			echo '<div class="cw-staffer-modal">
 							<span class="cw-modal-close dashicons dashicons-no"></span>
 							<div class="cw-modal-inner">
-							<h3 class="staff-name"></h3>
+							<h5 class="staff-name"></h5>
 							<div class="cw-modal-header">
 							<div class="section">
-							<h5 class="staff-title"></h3>
-							<h5 class="staff-department"></h3>
+							<h5 class="staff-title"></h5>
+							<h5 class="staff-department"></h5>
+							<div class="social-icons"></div>
 							</div>
 							<div class="section">
 							<h5 class="staff-phone"></h5>
 							<h5 class="staff-email"></h5>
-							</div>
-							<div class="section social-icons">
+							<h5 class="staff-website"></h5>
 							</div>
 							</div>
 							<div class="cw-modal-body cw-staffer-clearfix"></div>

@@ -70,7 +70,7 @@ class Staffer {
 
 		$this->plugin_name = 'staffer';
 		$this->version = '2.0.0';
-		$this->plugin_path = plugins_url('/overhaul-staffer');
+		$this->plugin_path = plugins_url('/staffer');
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -442,25 +442,26 @@ class Staffer {
 
 			$output .= '</ul>';
 
-			$output .= '<div class="cw-staffer-modal">';
-			$output .= '<span class="cw-modal-close dashicons dashicons-no"></span>';
-			$output .= '<div class="cw-modal-inner">';
-			$output .= '<h3 class="staff-name"></h3>';
-			$output .= '<div class="cw-modal-header">';
-			$output .= '<div class="section">';
-			$output .= '<h5 class="staff-title"></h3>';
-			$output .= '<h5 class="staff-department"></h3>';
-			$output .= '</div>';
-			$output .= '<div class="section">';
-			$output .= '<h5 class="staff-phone"></h5>';
-			$output .= '<h5 class="staff-email"></h5>';
-			$output .= '</div>';
-			$output .= '<div class="section social-icons">';
-			$output .= '</div>';
-			$output .= '</div>';
-			$output .= '<div class="cw-modal-body cw-staffer-clearfix"></div>';
-			$output .= '</div>';
-			$output .= '</div>';
+			$output .= '
+						<div class="cw-staffer-modal">
+							<span class="cw-modal-close dashicons dashicons-no"></span>
+							<div class="cw-modal-inner">
+							<h5 class="staff-name"></h5>
+							<div class="cw-modal-header">
+							<div class="section">
+							<h5 class="staff-title"></h5>
+							<h5 class="staff-department"></h5>
+							<div class="social-icons"></div>
+							</div>
+							<div class="section">
+							<h5 class="staff-phone"></h5>
+							<h5 class="staff-email"></h5>
+							<h5 class="staff-website"></h5>
+							</div>
+							</div>
+							<div class="cw-modal-body cw-staffer-clearfix"></div>
+							</div>
+						</div>';
 
 		endif;
 

@@ -1,0 +1,153 @@
+# Copyright (C) 2017 Staffer
+# This file is distributed under the same license as the Staffer package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Staffer 2.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/staffer\n"
+"POT-Creation-Date: 2017-09-21 10:48:04+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: admin/class-staffer-admin.php:65
+msgid "Profile Details"
+msgstr ""
+
+#: admin/class-staffer-admin.php:106
+msgid "Staff ID"
+msgstr ""
+
+#: admin/class-staffer-admin.php:111
+msgid "Title"
+msgstr ""
+
+#: admin/class-staffer-admin.php:116
+msgid "Facebook"
+msgstr ""
+
+#: admin/class-staffer-admin.php:121
+msgid "Google+"
+msgstr ""
+
+#: admin/class-staffer-admin.php:126
+msgid "Twitter"
+msgstr ""
+
+#: admin/class-staffer-admin.php:131
+msgid "LinkedIn"
+msgstr ""
+
+#: admin/class-staffer-admin.php:136
+msgid "Instagram"
+msgstr ""
+
+#: admin/class-staffer-admin.php:141
+msgid "YouTube"
+msgstr ""
+
+#: admin/class-staffer-admin.php:146
+msgid "Github"
+msgstr ""
+
+#: admin/class-staffer-admin.php:151
+msgid "Website"
+msgstr ""
+
+#: admin/class-staffer-admin.php:156
+msgid "Email"
+msgstr ""
+
+#: admin/class-staffer-admin.php:161
+msgid "Phone Number"
+msgstr ""
+
+#: admin/class-staffer-admin.php:228
+msgid "View Staff Page"
+msgstr ""
+
+#: admin/class-staffer-admin.php:253
+msgid "Options"
+msgstr ""
+
+#: admin/class-staffer-admin.php:268
+msgid "For paid support or customizations, please contact me at"
+msgstr ""
+
+#: admin/class-staffer-admin.php:273
+msgid "Staffer Options Panel"
+msgstr ""
+
+#: admin/class-staffer-admin.php:279
+msgid "Staff Page ID"
+msgstr ""
+
+#: admin/class-staffer-admin.php:281
+msgid ""
+"The ID of the main staff page. Do not change this unless you know what you "
+"are doing."
+msgstr ""
+
+#: admin/class-staffer-admin.php:287
+msgid "Staff Layout"
+msgstr ""
+
+#: admin/class-staffer-admin.php:310
+msgid "Save Changes"
+msgstr ""
+
+#: admin/class-staffer-admin.php:314
+msgid ""
+"Thank you for using Staffer. A lot of time went into development. Donations "
+"small or large are always appreciated."
+msgstr ""
+
+#: includes/class-staffer.php:228 includes/class-staffer.php:237
+msgid "Staff"
+msgstr ""
+
+#: includes/class-staffer.php:236
+msgid "staff"
+msgstr ""
+
+#: public/class-staffer-public.php:88
+msgid "Profile"
+msgstr ""
+
+#: public/class-staffer-public.php:89
+msgid "Add New Profile"
+msgstr ""
+
+#: public/class-staffer-public.php:90
+msgid "Edit Profile"
+msgstr ""
+
+#: public/class-staffer-public.php:91
+msgid "New Profile"
+msgstr ""
+
+#: public/class-staffer-public.php:92
+msgid "All Profiles"
+msgstr ""
+
+#: public/class-staffer-public.php:93
+msgid "View Profile"
+msgstr ""
+
+#: public/class-staffer-public.php:94
+msgid "Search Profiles"
+msgstr ""
+
+#: public/class-staffer-public.php:95 public/class-staffer-public.php:96
+msgid "Nothing Found"
+msgstr ""
+
+#: public/class-staffer-public.php:134
+msgid "Departments"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Staff profile management for WordPress"
+msgstr ""

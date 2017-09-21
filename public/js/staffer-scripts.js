@@ -69,7 +69,7 @@
 			$('.cw-staffer-modal .cw-modal-header .social-icons').html(iconOutput);
 
 			if( website ) {
-				$('.cw-staffer-modal .cw-modal-header .social-icons').append('<h5><a class="staffer-website-link" href="' + website + '">' + website + '</a></h5>');
+				$('.cw-staffer-modal .cw-modal-header .staff-website').html('<a class="staffer-website-link" href="' + website + '">' + website + '</a>');
 			}
 
 			$('.cw-staffer-modal .cw-modal-header .staff-phone').text(phone);
