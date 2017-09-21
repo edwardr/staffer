@@ -3,7 +3,7 @@
 /**
  * Fired during plugin deactivation
  *
- * @link       https://wpnook.com
+ * @link       https://codewrangler.io
  * @since      1.0.0
  *
  * @package    Staffer
@@ -18,12 +18,14 @@
  * @since      1.0.0
  * @package    Staffer
  * @subpackage Staffer/includes
- * @author     Edward Jenkins <edward@wpnook.com>
+ * @author     codeWrangler, Inc. <edward@codewrangler.io>
  */
 class Staffer_Deactivator {
 
 	/**
-	 * Flush permalinks and handle database
+	 * Short Description. (use period)
+	 *
+	 * Long Description.
 	 *
 	 * @since    1.0.0
 	 */

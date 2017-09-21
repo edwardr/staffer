@@ -6,8 +6,8 @@
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @link       https://wpnook.com
- * @since      1.0.0
+ * @link       https://codewrangler.io
+ * @since      2.0.0
  *
  * @package    Staffer
  * @subpackage Staffer/includes
@@ -19,10 +19,10 @@
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @since      1.0.0
+ * @since      2.0.0
  * @package    Staffer
  * @subpackage Staffer/includes
- * @author     Edward Jenkins <edward@wpnook.com>
+ * @author     codeWrangler, Inc. <edward@codewrangler.io>
  */
 class Staffer_i18n {
 
@@ -30,7 +30,7 @@ class Staffer_i18n {
 	/**
 	 * Load the plugin text domain for translation.
 	 *
-	 * @since    1.0.0
+	 * @since    2.0.0
 	 */
 	public function load_plugin_textdomain() {
 

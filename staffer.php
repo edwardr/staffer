@@ -8,17 +8,17 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              https://wpnook.com
- * @since             1.0.0
+ * @link              https://codewrangler.io
+ * @since             2.0.0
  * @package           Staffer
  *
  * @wordpress-plugin
- * Plugin Name:       Staffer
- * Plugin URI:        https://wpnook.com/plugins/staffer
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
- * Version:           1.0.0
- * Author:            Edward Jenkins
- * Author URI:        https://wpnook.com
+ * Plugin Name:       Overhaul Staffer
+ * Plugin URI:        https://wordpress.org/plugins/staffer/
+ * Description:       Staff profile management for WordPress
+ * Version:           2.0.0
+ * Author:            codeWrangler, Inc.
+ * Author URI:        https://codewrangler.io
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       staffer

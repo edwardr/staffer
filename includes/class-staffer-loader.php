@@ -3,8 +3,8 @@
 /**
  * Register all actions and filters for the plugin
  *
- * @link       https://wpnook.com
- * @since      1.0.0
+ * @link       https://codewrangler.io
+ * @since      2.0.0
  *
  * @package    Staffer
  * @subpackage Staffer/includes
@@ -19,14 +19,14 @@
  *
  * @package    Staffer
  * @subpackage Staffer/includes
- * @author     Edward Jenkins <edward@wpnook.com>
+ * @author     codeWrangler, Inc. <edward@codewrangler.io>
  */
 class Staffer_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    2.0.0
 	 * @access   protected
 	 * @var      array    $actions    The actions registered with WordPress to fire when the plugin loads.
 	 */
@@ -35,28 +35,37 @@ class Staffer_Loader {
 	/**
 	 * The array of filters registered with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    2.0.0
 	 * @access   protected
 	 * @var      array    $filters    The filters registered with WordPress to fire when the plugin loads.
 	 */
 	protected $filters;
 
 	/**
+	 * The array of shortcodes registered with WordPress.
+	 *
+	 * @since    2.0.0
+	 * @access   protected
+	 * @var      array    $filters    The filters registered with WordPress to fire when the plugin loads.
+	 */
+	protected $shortcodes;
+
+	/**
 	 * Initialize the collections used to maintain the actions and filters.
 	 *
-	 * @since    1.0.0
+	 * @since    2.0.0
 	 */
 	public function __construct() {
 
 		$this->actions = array();
 		$this->filters = array();
-
+		$this->shortcodes = array();
 	}
 
 	/**
 	 * Add a new action to the collection to be registered with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    2.0.0
 	 * @param    string               $hook             The name of the WordPress action that is being registered.
 	 * @param    object               $component        A reference to the instance of the object on which the action is defined.
 	 * @param    string               $callback         The name of the function definition on the $component.
@@ -70,7 +79,7 @@ class Staffer_Loader {
 	/**
 	 * Add a new filter to the collection to be registered with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    2.0.0
 	 * @param    string               $hook             The name of the WordPress filter that is being registered.
 	 * @param    object               $component        A reference to the instance of the object on which the filter is defined.
 	 * @param    string               $callback         The name of the function definition on the $component.
@@ -82,10 +91,24 @@ class Staffer_Loader {
 	}
 
 	/**
+	 * Add a new shortcode to the collection to be registered with WordPress.
+	 *
+	 * @since    2.0.0
+	 * @param    string               $hook             The name of the WordPress filter that is being registered.
+	 * @param    object               $component        A reference to the instance of the object on which the filter is defined.
+	 * @param    string               $callback         The name of the function definition on the $component.
+	 * @param    int                  $priority         Optional. he priority at which the function should be fired. Default is 10.
+	 * @param    int                  $accepted_args    Optional. The number of arguments that should be passed to the $callback. Default is 1
+	 */
+	public function add_shortcode( $hook, $component, $callback, $priority = 10, $accepted_args = 1 ) {
+		$this->shortcodes = $this->add( $this->shortcodes, $hook, $component, $callback, $priority, $accepted_args );
+	}
+
+	/**
 	 * A utility function that is used to register the actions and hooks into a single
 	 * collection.
 	 *
-	 * @since    1.0.0
+	 * @since    2.0.0
 	 * @access   private
 	 * @param    array                $hooks            The collection of hooks that is being registered (that is, actions or filters).
 	 * @param    string               $hook             The name of the WordPress filter that is being registered.
@@ -109,22 +132,10 @@ class Staffer_Loader {
 
 	}
 
-    /**
-     * Add a new shortcode to the collection to be registered with WordPress
-     *
-     * @since     1.0.0
-     * @param     string        $tag           The name of the new shortcode.
-     * @param     object        $component      A reference to the instance of the object on which the shortcode is defined.
-     * @param     string        $callback       The name of the function that defines the shortcode.
-     */
-    public function add_shortcode( $tag, $component, $callback, $priority = 10, $accepted_args = 2 ) {
-        $this->shortcodes = $this->add( $this->shortcodes, $tag, $component, $callback, $priority, $accepted_args);
-    }
-
 	/**
 	 * Register the filters and actions with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    2.0.0
 	 */
 	public function run() {
 
@@ -136,9 +147,9 @@ class Staffer_Loader {
 			add_action( $hook['hook'], array( $hook['component'], $hook['callback'] ), $hook['priority'], $hook['accepted_args'] );
 		}
 
-        foreach ( $this->shortcodes as $hook ) {
-            add_shortcode( $hook['hook'], array( $hook['component'], $hook['callback'], $hook['priority'], $hook['accepted_args']) );
-        }
+		foreach ( $this->shortcodes as $hook ) {
+			add_shortcode( $hook['hook'], array( $hook['component'], $hook['callback'] ), $hook['priority'], $hook['accepted_args'] );
+		}
 
 	}
 
