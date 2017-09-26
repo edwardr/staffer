@@ -40,7 +40,7 @@
 			fb = $(this).attr('data-facebook');
 			twitter = $(this).attr('data-twitter');
 			linkedin = $(this).attr('data-linkedin');
-			gplus = $(this).attr('data-gplus');
+			gplus = $(this).attr('data-google-plus');
 
 			youtube = $(this).attr('data-youtube');
 			instagram = $(this).attr('data-instagram');
@@ -57,7 +57,7 @@
 			}
 
 			$.each( iconArr, function( key, value ) {
-				if( value !== undefined ) {
+				if( value !== '' ) {
 					iconOutput += '<a href="' + value + '"><img class="staffer-social-icon" src="' + cwStaffer.plugin_path + '../public/assets/' + key + '.svg' + '" alt="' + name + '"/>';
 				}
 			});
@@ -70,6 +70,8 @@
 
 			if( website ) {
 				$('.cw-staffer-modal .cw-modal-header .staff-website').html('<a class="staffer-website-link" href="' + website + '">' + website + '</a>');
+			} else {
+				$('.cw-staffer-modal .cw-modal-header .staff-website').html('');
 			}
 
 			$('.cw-staffer-modal .cw-modal-header .staff-phone').text(phone);

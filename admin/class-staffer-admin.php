@@ -104,7 +104,12 @@ class Staffer_Admin {
 
 		echo '<p><label for="staffer_id">
 						<strong>' . __('Staff ID', 'staffer' ) . '</strong>
-						<input type="text" id="staffer_id" name="staffer_id" class="widefat" value="' . $post->ID . '" disabled>
+						<input style="cursor: not-allowed;" type="text" id="staffer_id" name="staffer_id" class="widefat" value="' . $post->ID . '" disabled>
+					</label></p>';
+
+		echo '<p><label for="staffer_id">
+						<strong>' . __('Staff Permalink Slug', 'staffer' ) . '</strong>
+						<input style="cursor: not-allowed;" type="text" id="staffer_slug" name="staffer_slug" class="widefat" value="' . $post->post_name . '" disabled>
 					</label></p>';
 
 		echo '<p><label for="staffer_staff_title">

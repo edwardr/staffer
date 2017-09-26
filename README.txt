@@ -4,7 +4,7 @@ Tags: staff, staff directory, profile, business
 Donate link: https://codewrangler.io
 Requires at least: 3.5
 Tested up to: 4.8.2
-Stable tag: 2.0.0
+Stable tag: 2.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,7 +40,7 @@ Using the extra parameters, you could reorder the entries using WP_Query’s ord
 
 For example, if you wanted to display 50 staff members, ordered by name alphabetically, you would do the following:
 
-[staffer number="50" order="ASC" orderby="name"]
+`[staffer number="50" order="ASC" orderby="name"]`
 
 = How Can I Set the Order of Staff Profiles? =
 
@@ -61,6 +61,14 @@ You may seek community support within the WordPress.org forums. I will try to mo
 4. Staff profile editor
 
 == Changelog ==
+=2.0.2=
+= September 26, 2016 =
+* fixed dashicons issue
+* fixed undefined website or social media links
+* fixed issue with shortcode list not getting Staffer body class
+= 2.0.1 =
+= September 22, 2017 =
+* patch for empty social icon links in staff modal
 = 2.0.0 =
 = September 21, 2017 =
 * Complete rebuild to be object-oriented

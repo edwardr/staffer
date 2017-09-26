@@ -164,6 +164,7 @@ class Staffer_Public {
 	public function enqueue_styles() {
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/staffer-styles.css', array(), $this->version, 'all' );
+		wp_enqueue_style( 'dashicons' );
 
 	}
 
@@ -375,6 +376,8 @@ class Staffer_Public {
 							<div class="cw-modal-body cw-staffer-clearfix"></div>
 							</div>
 						</div>';
+
+			echo '<script>jQuery("body").addClass("staffer-main-page");</script>';
 
 		endif;
 
