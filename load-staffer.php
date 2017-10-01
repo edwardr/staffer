@@ -16,7 +16,7 @@
  * Plugin Name:       Staffer
  * Plugin URI:        https://wordpress.org/plugins/staffer/
  * Description:       Staff profile management for WordPress
- * Version:           2.0.2
+ * Version:           2.1.0
  * Author:            codeWrangler, Inc.
  * Author URI:        https://codewrangler.io
  * License:           GPL-2.0+

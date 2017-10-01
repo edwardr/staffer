@@ -280,7 +280,7 @@ class Staffer_Public {
 
 				echo '<div class="staff-content cw-staffer-clearfix">';
 
-				echo '<a data-bio="' . wpautop( $staff_obj->bio ) . '"
+				echo '<a data-bio="' . esc_attr( wpautop( do_shortcode($staff_obj->bio ) ) ) . '"
 									data-name="' . $staff_obj->name . '"
 									data-departments="' . $departments_string . '"
 									data-image="' . esc_attr( $thumbnail ) . '"
@@ -306,7 +306,7 @@ class Staffer_Public {
 				}
 
 				echo '<h3 class="staffer-staff-title">
-										<a data-bio="' . wpautop( $staff_obj->bio ) . '"
+										<a data-bio="' . esc_attr( wpautop( do_shortcode($staff_obj->bio ) ) ) . '"
 											data-name="' . $staff_obj->name . '"
 											data-departments="' . $departments_string . '"
 											data-image="' . esc_attr( $thumbnail ) . '"
@@ -329,15 +329,15 @@ class Staffer_Public {
 									</h3>';
 
 				if( $staff_obj->title ) {
-					echo '<small><em>' . $staff_obj->title . '</em></small>';
+					echo '<small class="staffer-staff-title"><em>' . $staff_obj->title . '</em></small>';
 				}
 
 				if( $departments_string ) {
-					echo '<small><em>' . $departments_string . '</em></small>';
+					echo '<small class="staffer-staff-departments"><em>' . $departments_string . '</em></small>';
 				}
 
 				if( $staff_obj->phone ) {
-					echo '<small><em>' . $staff_obj->phone . '</em></small>';
+					echo '<small class="staffer-staff-phone"><em>' . $staff_obj->phone . '</em></small>';
 				}
 
 				if( $staff_obj->email ) {
@@ -358,8 +358,8 @@ class Staffer_Public {
 			echo '</ul>';
 
 			echo '<div class="cw-staffer-modal">
-							<span class="cw-modal-close dashicons dashicons-no"></span>
 							<div class="cw-modal-inner">
+							<span class="cw-modal-close dashicons dashicons-no"></span>
 							<h5 class="staff-name"></h5>
 							<div class="cw-modal-header">
 							<div class="section">

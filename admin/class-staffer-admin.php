@@ -79,6 +79,9 @@ class Staffer_Admin {
 
 	public function staffer_meta_callback( $post ) {
 
+		$staffer = new Staffer();
+		$options = $staffer->get_options();
+
 		wp_nonce_field( 'staffer_meta', 'staffer_meta_nonce' );
 
 		$keys = array(
@@ -102,15 +105,30 @@ class Staffer_Admin {
 			$field_values[$k] = $v;
 		}
 
+		$main_page_id = $options['main_page_id'];
+
 		echo '<p><label for="staffer_id">
 						<strong>' . __('Staff ID', 'staffer' ) . '</strong>
 						<input style="cursor: not-allowed;" type="text" id="staffer_id" name="staffer_id" class="widefat" value="' . $post->ID . '" disabled>
 					</label></p>';
 
-		echo '<p><label for="staffer_id">
-						<strong>' . __('Staff Permalink Slug', 'staffer' ) . '</strong>
-						<input style="cursor: not-allowed;" type="text" id="staffer_slug" name="staffer_slug" class="widefat" value="' . $post->post_name . '" disabled>
+		if( $main_page_id ) {
+			$main_page = get_post( $main_page_id );
+			if( $main_page ) {
+
+			$url = get_site_url() . '/' . $main_page->post_name . '/' . '?uid=' . $post->post_name;
+			echo '<p><label for="staffer_slug">
+							<strong>' . __('Staff Member URL', 'staffer' ) . '</strong><br>
+							<a href="' . $url . '" target="_blank">' . $url . '</a>
+						</label></p>';
+			}
+		}
+
+		echo '<p><label for="staffer_slug">
+						<strong>' . __('Staff Permalink Slug</strong> (<em>auto-generated if left blank</em>)', 'staffer' ) . '</strong>
+						<input type="text" id="staffer_slug" name="staffer_slug" class="widefat" value="' . $post->post_name . '">
 					</label></p>';
+
 
 		echo '<p><label for="staffer_staff_title">
 						<strong>' . __('Title', 'staffer' ) . '</strong>
@@ -212,6 +230,23 @@ class Staffer_Admin {
 		foreach( $data as $k => $v ) {
 			update_post_meta( $post_id, $k, $v );
 		}
+
+
+		/**
+		 * @since  2.1.0 Saves staff slug, removes action to avoid infinite loop
+		 */
+
+		$slug = sanitize_title_with_dashes( $_POST['staffer_slug'] );
+
+		$r = array(
+			'ID' => $post_id,
+			'post_name' => $slug,
+		);
+
+		// Temporarily remove the action to avoid an infinite loop
+		remove_action('save_post_staff', array($this, 'save_staffer_meta' ) );
+		wp_update_post( $r );
+		add_action('save_post_staff', array($this, 'save_staffer_meta' ) );
 
 	}
 
