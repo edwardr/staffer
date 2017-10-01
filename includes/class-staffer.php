@@ -69,7 +69,7 @@ class Staffer {
 	public function __construct() {
 
 		$this->plugin_name = 'staffer';
-		$this->version = '2.0.0';
+		$this->version = '2.1.0';
 		$this->plugin_path = plugins_url('/staffer');
 
 		$this->load_dependencies();
@@ -364,7 +364,7 @@ class Staffer {
 
 				$output .= '<div class="staff-content cw-staffer-clearfix">';
 
-				$output .= '<a data-bio="' . wpautop( $staff_obj->bio ) . '"
+				$output .= '<a data-bio="' . esc_attr( wpautop( do_shortcode($staff_obj->bio ) ) ) . '"
 									data-name="' . $staff_obj->name . '"
 									data-departments="' . $departments_string . '"
 									data-image="' . esc_attr( $thumbnail ) . '"
@@ -390,7 +390,7 @@ class Staffer {
 				}
 
 				$output .= '<h3 class="staffer-staff-title">
-										<a data-bio="' . wpautop( $staff_obj->bio ) . '"
+										<a data-bio="' . esc_attr( wpautop( do_shortcode($staff_obj->bio ) ) ) . '"
 											data-name="' . $staff_obj->name . '"
 											data-departments="' . $departments_string . '"
 											data-image="' . esc_attr( $thumbnail ) . '"
@@ -413,15 +413,15 @@ class Staffer {
 									</h3>';
 
 				if( $staff_obj->title ) {
-					$output .= '<small><em>' . $staff_obj->title . '</em></small>';
+					$output .= '<small class="staffer-staff-title"><em>' . $staff_obj->title . '</em></small>';
 				}
 
 				if( $departments_string ) {
-					$output .= '<small><em>' . $departments_string . '</em></small>';
+					$output .= '<small class="staffer-staff-departments"><em>' . $departments_string . '</em></small>';
 				}
 
 				if( $staff_obj->phone ) {
-					$output .= '<small><em>' . $staff_obj->phone . '</em></small>';
+					$output .= '<small class="staffer-staff-phone"><em>' . $staff_obj->phone . '</em></small>';
 				}
 
 				if( $staff_obj->email ) {
@@ -444,8 +444,8 @@ class Staffer {
 
 			$output .= '
 						<div class="cw-staffer-modal">
-							<span class="cw-modal-close dashicons dashicons-no"></span>
 							<div class="cw-modal-inner">
+							<span class="cw-modal-close dashicons dashicons-no"></span>
 							<h5 class="staff-name"></h5>
 							<div class="cw-modal-header">
 							<div class="section">
@@ -465,7 +465,7 @@ class Staffer {
 
 		endif;
 
-		return $output;
+		return do_shortcode( $output );
 	}
 
 }

@@ -24,13 +24,13 @@ Staffer uses custom post types for staff/employee management, allowing users to 
 
 Follow this format for shortcodes:
 
-[staffer]
+`[staffer]`
 
 The above example would output all of the staff listings in default order.
 
 To fine-tune, you can use parameters:
 
-[staffer number="5" department="slug" layout="grid"]
+`[staffer number="5" department="slug" layout="grid"]`
 
 In the above example, “number” refers to the number of entries to retrieve, and “department” refers to the department name slug. For instance, if you only wanted to show a list of members in department term with the “management” slug, you would pass “management” as a parameter. Layout can be either `grid` or `list`.
 
@@ -61,6 +61,11 @@ You may seek community support within the WordPress.org forums. I will try to mo
 4. Staff profile editor
 
 == Changelog ==
+=2.1.0=
+= September 30, 2016 =
+* Adds ability to edit permalink for staff profiles
+* Fixes modal close issue on iOS
+* Adds shortcode support for staff bio
 =2.0.2=
 = September 26, 2016 =
 * fixed dashicons issue
@@ -112,6 +117,10 @@ You may seek community support within the WordPress.org forums. I will try to mo
 * Initial release
 
 == Upgrade Notice ==
+= 2.1.0 =
+* Adds ability to edit permalink for staff profiles
+* Fixes modal close issue on iOS
+* Adds shortcode support for staff bio
 = 2.0.0 =
 This is a complete rebuild of Staffer.
 = 1.3.3=

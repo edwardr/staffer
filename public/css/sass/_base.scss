@@ -125,11 +125,11 @@ ul.staffer-archive-list li {
 	z-index: 9999999;
 	background-color: white;
 	color: #222;
-	overflow: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
 	margin: 0 auto;
 	border: 1px solid rgb(26, 26, 26);
 	/*width: 50%;*/
-	height: 80vh;
 	margin: 1% auto;
 	left: 0;
 	right: 0;
@@ -141,16 +141,16 @@ ul.staffer-archive-list li {
 }
 
 .cw-staffer-modal .cw-modal-inner {
-	width: 95%;
 	margin: 0 auto;
 	padding: 20px;
+	position: relative;
 }
 
 .cw-staffer-modal .cw-modal-close {
 	font-size: 28px;
 	position: absolute;
-	right: 20px;
-	top: 20px;
+	right: 10px;
+	top: 10px;
 	cursor: pointer;
 }
 
