@@ -62,12 +62,12 @@ You may seek community support within the WordPress.org forums. I will try to mo
 
 == Changelog ==
 =2.1.0=
-= September 30, 2016 =
+= September 30, 2017 =
 * Adds ability to edit permalink for staff profiles
 * Fixes modal close issue on iOS
 * Adds shortcode support for staff bio
 =2.0.2=
-= September 26, 2016 =
+= September 26, 2017 =
 * fixed dashicons issue
 * fixed undefined website or social media links
 * fixed issue with shortcode list not getting Staffer body class
