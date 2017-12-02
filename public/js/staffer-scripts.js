@@ -24,7 +24,7 @@
 			instagram,github, iconArr,
 			iconOutput = '';
 
-			bio = $(this).attr('data-bio');
+			bio = $(this).closest('.staff-li').find('.staffer-staff-bio').html();
 			img = $(this).attr('data-large-image');
 			img = img.replace('aligncenter', 'alignleft');
 			img = img.replace('alignleft', 'alignleft cw-staffer-max-image');

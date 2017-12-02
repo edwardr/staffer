@@ -298,7 +298,7 @@ class Staffer {
 	 * @since     2.0.0
 	 * @return  string  Markup for Staffer output
 	 */
-	
+
 	public function build_staff_page() {
 		//ob_start();
 
@@ -364,7 +364,33 @@ class Staffer {
 
 				$output .= '<div class="staff-content cw-staffer-clearfix">';
 
-				$output .= '<a data-bio="' . esc_attr( wpautop( do_shortcode($staff_obj->bio ) ) ) . '"
+				$output .= '<a
+								data-name="' . $staff_obj->name . '"
+								data-departments="' . $departments_string . '"
+								data-image="' . esc_attr( $thumbnail ) . '"
+								data-large-image="' . esc_attr( $large ) . '"
+								data-phone="' . $staff_obj->phone . '"
+								data-email="' . $staff_obj->email . '"
+								data-facebook="' . $staff_obj->facebook . '"
+								data-twitter="' . $staff_obj->twitter . '"
+								data-linkedin="' . $staff_obj->linkedin . '"
+								data-youtube="' . $staff_obj->youtube . '"
+								data-instagram="' . $staff_obj->instagram . '"
+								data-github="' . $staff_obj->github . '"
+								data-google-plus="' . $staff_obj->google_plus . '"
+								data-website="' . $staff_obj->website . '"
+								data-title="' . $staff_obj->title . '"
+								data-staff-slug="' . $staff->post_name. '"
+								data-staff-id="' . $staff_obj->ID . '"
+								class="cw-launch-staffer-modal" href="/">' . $thumbnail . '</a>';
+
+				if( $options['layout'] == 'grid' ) {
+					$output .= '</div>';
+					$output .= '<header class="staffer-staff-header">';
+				}
+
+				$output .= '<h3 class="staffer-staff-title">
+								<a
 									data-name="' . $staff_obj->name . '"
 									data-departments="' . $departments_string . '"
 									data-image="' . esc_attr( $thumbnail ) . '"
@@ -382,35 +408,9 @@ class Staffer {
 									data-title="' . $staff_obj->title . '"
 									data-staff-slug="' . $staff->post_name. '"
 									data-staff-id="' . $staff_obj->ID . '"
-									class="cw-launch-staffer-modal" href="/">' . $thumbnail . '</a>';
-				
-				if( $options['layout'] == 'grid' ) {
-					$output .= '</div>';
-					$output .= '<header class="staffer-staff-header">';
-				}
-
-				$output .= '<h3 class="staffer-staff-title">
-										<a data-bio="' . esc_attr( wpautop( do_shortcode($staff_obj->bio ) ) ) . '"
-											data-name="' . $staff_obj->name . '"
-											data-departments="' . $departments_string . '"
-											data-image="' . esc_attr( $thumbnail ) . '"
-											data-large-image="' . esc_attr( $large ) . '"
-											data-phone="' . $staff_obj->phone . '"
-											data-email="' . $staff_obj->email . '"
-											data-facebook="' . $staff_obj->facebook . '"
-											data-twitter="' . $staff_obj->twitter . '"
-											data-linkedin="' . $staff_obj->linkedin . '"
-											data-youtube="' . $staff_obj->youtube . '"
-											data-instagram="' . $staff_obj->instagram . '"
-											data-github="' . $staff_obj->github . '"
-											data-google-plus="' . $staff_obj->google_plus . '"
-											data-website="' . $staff_obj->website . '"
-											data-title="' . $staff_obj->title . '"
-											data-staff-slug="' . $staff->post_name. '"
-											data-staff-id="' . $staff_obj->ID . '"
-											class="cw-launch-staffer-modal" href="/">
-										' . $staff_obj->name . '</a>
-									</h3>';
+									class="cw-launch-staffer-modal" href="/">
+								' . $staff_obj->name . '</a>
+							</h3>';
 
 				if( $staff_obj->title ) {
 					$output .= '<small class="staffer-staff-title"><em>' . $staff_obj->title . '</em></small>';
@@ -426,6 +426,12 @@ class Staffer {
 
 				if( $staff_obj->email ) {
 					$output .= '<small class="staffer-staff-email"><em></em></small>';
+				}
+
+				$output .= '<div class="vtest"></div>';
+
+				if( $staff_obj->bio ) {
+					$output .= '<article class="staffer-staff-bio">' . $staff_obj->bio . '</article>';
 				}
 
 				if( $options['layout'] == 'list' ) {

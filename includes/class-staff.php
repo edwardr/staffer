@@ -42,7 +42,7 @@ class CW_Staff {
 		$this->ID = $post->ID;
 		$this->name = $post->post_title;
 		$this->title = get_post_meta( $post_id, 'staffer_staff_title', true );
-		$this->bio = esc_attr( $post->post_content );
+		$this->bio = apply_filters( 'the_content', $post->post_content );
 		$this->departments = wp_get_post_terms( $post_id, 'department' );
 		$excerpt = $post->post_excerpt;
 		$this->excerpt = empty( $excerpt ) ? wp_trim_words( $post->post_content, 55 ) : $excerpt;
