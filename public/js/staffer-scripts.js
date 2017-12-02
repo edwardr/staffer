@@ -92,15 +92,30 @@
 
 		});
 
-		$('.cw-staffer-modal .cw-modal-close').on('click', function(e) {
-			$('.cw-staffer-modal').hide();
-			$('body').removeClass('cw-staffer-overlay');
-			$('html').removeClass('cw-staffer-overlay');
+		$('html').on('click', function(e){
 
-			var state = { name: 'none' };
-			history.replaceState(state, '', '?' );
+			var close = function(){
+				$('.cw-staffer-modal').hide();
+				$('html, body').removeClass('cw-staffer-overlay');
+				var state = { name: 'none' };
+				history.replaceState( state, '', '?' );
+			};
 
-			return false;
+			// check if modal is open, otherwise return
+			if( !$('html').hasClass('cw-staffer-overlay') ) {
+				return;
+			}
+
+			// clicked outside modal
+			if( !$(e.target).closest('.cw-modal-inner').length && !$(e.target).is('.cw-modal-inner') ) {
+				close();
+			}
+
+			// clicked close button
+			if( $(e.target).is('.cw-modal-close') ) {
+				e.preventDefault();
+				close();
+			}
 		});
 
 		if( $('body').hasClass('staffer-main-page') ) {
