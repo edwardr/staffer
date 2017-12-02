@@ -281,7 +281,7 @@ class Staffer_Public {
 				echo '<div class="staff-content cw-staffer-clearfix">';
 
 				echo '<a
-						data-name="' . $staff_obj->name . '"
+						data-name="' . esc_attr( $staff_obj->name ) . '"
 						data-departments="' . $departments_string . '"
 						data-image="' . esc_attr( $thumbnail ) . '"
 						data-large-image="' . esc_attr( $large ) . '"
@@ -298,7 +298,7 @@ class Staffer_Public {
 						data-title="' . $staff_obj->title . '"
 						data-staff-slug="' . $staff->post_name. '"
 						data-staff-id="' . $staff_obj->ID . '"
-						class="cw-launch-staffer-modal" href="/">' . $thumbnail . '</a>';
+						class="cw-launch-staffer-modal" href="?uid=' . $staff->post_name . '">' . $thumbnail . '</a>';
 
 				if( $options['layout'] == 'grid' ) {
 					echo '</div>';
@@ -307,7 +307,7 @@ class Staffer_Public {
 
 				echo '<h3 class="staffer-staff-title">
 						<a
-							data-name="' . $staff_obj->name . '"
+							data-name="' . esc_attr( $staff_obj->name ) . '"
 							data-departments="' . $departments_string . '"
 							data-image="' . esc_attr( $thumbnail ) . '"
 							data-large-image="' . esc_attr( $large ) . '"
@@ -324,7 +324,7 @@ class Staffer_Public {
 							data-title="' . $staff_obj->title . '"
 							data-staff-slug="' . $staff->post_name. '"
 							data-staff-id="' . $staff_obj->ID . '"
-							class="cw-launch-staffer-modal" href="/">
+							class="cw-launch-staffer-modal" href="?uid=' . $staff->post_name . '">
 						' . $staff_obj->name . '</a>
 					</h3>';
 
