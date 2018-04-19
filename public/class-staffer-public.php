@@ -24,7 +24,7 @@ class Staffer_Public {
 	 *
 	 * @since    2.0.0
 	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var      string $plugin_name The ID of this plugin.
 	 */
 	private $plugin_name;
 
@@ -33,7 +33,7 @@ class Staffer_Public {
 	 *
 	 * @since    2.0.0
 	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
+	 * @var      string $version The current version of this plugin.
 	 */
 	private $version;
 
@@ -41,13 +41,14 @@ class Staffer_Public {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    2.0.0
-	 * @param      string    $plugin_name       The name of the plugin.
-	 * @param      string    $version    The version of this plugin.
+	 *
+	 * @param      string $plugin_name The name of the plugin.
+	 * @param      string $version The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 
 	}
 
@@ -62,8 +63,8 @@ class Staffer_Public {
 		$staffer = new Staffer();
 		$options = $staffer->get_options();
 
-		if( $options['main_page_id'] ) {
-			if( get_post_status( $options['main_page_id'] ) != 'publish' || get_post_type( $options['main_page_id'] ) != 'page' ) {
+		if ( $options['main_page_id'] ) {
+			if ( get_post_status( $options['main_page_id'] ) != 'publish' || get_post_type( $options['main_page_id'] ) != 'page' ) {
 				$staffer->create_staff_page();
 			}
 		} else {
@@ -76,38 +77,38 @@ class Staffer_Public {
 		$slug = $page->post_name;
 
 		$rewrite = array(
-			'slug'        => $slug,
-			'with_front'  => false,
-			'pages'       => false,
-			'feeds'       => true,
+			'slug'       => $slug,
+			'with_front' => false,
+			'pages'      => false,
+			'feeds'      => true,
 		);
 
-		register_post_type('staff', array(
-			'labels' => array(
-				'name' => $options['label'],
-				'singular_name' => __('Profile'),
-				'add_new_item' => __('Add New Profile'),
-				'edit_item' => __('Edit Profile'),
-				'new_item' => __('New Profile'),
-				'all_items' => __('All Profiles'),
-				'view_item' => __('View Profile'),
-				'search_items' => __('Search Profiles'),
-				'not_found' => __('Nothing Found'),
-				'not_found_in_trash' => __('Nothing Found'),
-			),
-			'public' => false,
-			'has_archive' => false,
-			'show_ui' => true,
-			'menu_order' => '4',
-			'rewrite' => $rewrite,
-			'menu_icon' => 'dashicons-id',
-			'supports' => array(
-				'title',
-				'editor',
-				'revisions',
-				//'custom-fields',
-				'thumbnail',
-				'excerpt'
+		register_post_type( 'staff', array(
+				'labels'      => array(
+					'name'               => $options['label'],
+					'singular_name'      => __( 'Profile' ),
+					'add_new_item'       => __( 'Add New Profile' ),
+					'edit_item'          => __( 'Edit Profile' ),
+					'new_item'           => __( 'New Profile' ),
+					'all_items'          => __( 'All Profiles' ),
+					'view_item'          => __( 'View Profile' ),
+					'search_items'       => __( 'Search Profiles' ),
+					'not_found'          => __( 'Nothing Found' ),
+					'not_found_in_trash' => __( 'Nothing Found' ),
+				),
+				'public'      => false,
+				'has_archive' => false,
+				'show_ui'     => true,
+				'menu_order'  => '4',
+				'rewrite'     => $rewrite,
+				'menu_icon'   => 'dashicons-id',
+				'supports'    => array(
+					'title',
+					'editor',
+					'revisions',
+					//'custom-fields',
+					'thumbnail',
+					'excerpt'
 				)
 			)
 		);
@@ -120,7 +121,7 @@ class Staffer_Public {
 	 *
 	 * @since  1.0.0
 	 */
-	
+
 	public function register_taxonomies() {
 
 		$staffer = new Staffer();
@@ -131,9 +132,9 @@ class Staffer_Public {
 			'staff',
 			array(
 				'hierarchical' => true,
-				'label' => __( 'Departments', 'staffer' ),
-				'public' => false,
-				'show_ui' => true,
+				'label'        => __( 'Departments', 'staffer' ),
+				'public'       => false,
+				'show_ui'      => true,
 			)
 		);
 
@@ -144,11 +145,11 @@ class Staffer_Public {
 	 *
 	 * @since  2.0.0
 	 */
-	
+
 	public function staffer_thumbnail_check() {
 
-		if ( !current_theme_supports ('post-thumbnails') ) {
-			add_theme_support ('post-thumbnails' );
+		if ( ! current_theme_supports( 'post-thumbnails' ) ) {
+			add_theme_support( 'post-thumbnails' );
 		}
 
 		add_image_size( 'staffer-thumb', 250, 250, array( 'center', 'center' ) );
@@ -163,7 +164,8 @@ class Staffer_Public {
 	 */
 	public function enqueue_styles() {
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/staffer-styles.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/staffer-styles.css', array(),
+			$this->version, 'all' );
 		wp_enqueue_style( 'dashicons' );
 
 	}
@@ -175,7 +177,8 @@ class Staffer_Public {
 	 */
 	public function enqueue_scripts() {
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/staffer-scripts.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/staffer-scripts.js', array( 'jquery' ),
+			$this->version, false );
 
 		$data = array(
 			'plugin_path' => plugin_dir_url( __FILE__ ),
@@ -197,76 +200,77 @@ class Staffer_Public {
 
 		ob_start();
 
-		extract( shortcode_atts( array (
-			'order' => 'DESC',
-			'orderby' => 'date',
-			'number' => -1,
+		extract( shortcode_atts( array(
+			'order'      => 'DESC',
+			'orderby'    => 'staffer_staff_order',
+			'number'     => - 1,
 			'department' => '',
-			'layout'		 => $options['layout'],
+			'layout'     => $options['layout'],
 		), $atts ) );
 
 		if ( '' == $department ) {
 			$tax_query = '';
 		} else {
-			$tax_query = array (
-				array (
-					'taxonomy'	=> 'department',
-					'field'		=> 'slug',
-					'terms'		=> $department,
-					),
-				);
+			$tax_query = array(
+				array(
+					'taxonomy' => 'department',
+					'field'    => 'slug',
+					'terms'    => $department,
+				),
+			);
 		}
 
 		$args = array(
-			'post_type' => 'staff',
-			'order' => esc_attr( $order ),
-			'orderby' => esc_attr( $orderby ),
-			'posts_per_page' => (int)$number,
-			'tax_query' => $tax_query,
+			'post_type'      => 'staff',
+			'order'          => esc_attr( $order ),
+			'orderby'        => esc_attr( $orderby ),
+			'meta_key'       => esc_attr( $orderby ),
+			'posts_per_page' => (int) $number,
+			'tax_query'      => $tax_query,
 		);
 
 		$staff_posts = get_posts( $args );
 
-		if( $staff_posts ):
-			$ul_class = $layout == 'grid' ? 'staffer-archive-grid' : 'staffer-archive-list';
+		if ( $staff_posts ):
+			$ul_class  = $layout == 'grid' ? 'staffer-archive-grid' : 'staffer-archive-list';
 			$img_class = $layout == 'grid' ? 'aligncenter' : 'alignleft staffer-list-image';
 
 			echo '<ul class="' . $ul_class . '">';
 
-			foreach( $staff_posts as $staff ) {
+			foreach ( $staff_posts as $staff ) {
 				$staff_obj = new CW_Staff( $staff->ID );
-				$thumbnail = get_the_post_thumbnail ( $staff_obj->ID, 'staffer-thumb', array ('class' => $img_class ) );
-				$large = get_the_post_thumbnail ( $staff_obj->ID, 'large', array ('class' => $img_class ) );
+				$thumbnail = get_the_post_thumbnail( $staff_obj->ID, 'staffer-thumb', array( 'class' => $img_class ) );
+				$large     = get_the_post_thumbnail( $staff_obj->ID, 'large', array( 'class' => $img_class ) );
 
-				if( '' == $thumbnail ) {
+				if ( '' == $thumbnail ) {
 					$default_thumb = $staffer->plugin_path . '/public/assets/staffer-default-image.jpg';
-					$thumbnail .= '<img src="' . $default_thumb . '" alt="' . $staff_obj->name . '" class="' . $img_class . '" />';
+					$thumbnail     .= '<img src="' . $default_thumb . '" alt="' . $staff_obj->name . '" class="' . $img_class . '" />';
 				}
 
 				$departments_string = '';
 
-				if( $staff_obj->departments ) {
-					foreach( $staff_obj->departments as $department ) {
+				if ( $staff_obj->departments ) {
+					foreach ( $staff_obj->departments as $department ) {
 						$departments_string .= $department->name . ', ';
 					}
 				}
 
-				if( $layout == 'grid' ) {
+				if ( $layout == 'grid' ) {
 					$social_output = '';
 				} else {
 					$social_output = '<div class="social-icons">';
 
 					$social_arr = array(
-						'facebook' => $staff_obj->facebook,
-						'twitter' => $staff_obj->twitter,
-						'linkedin' => $staff_obj->linkedin,
-						'youtube' => $staff_obj->youtube,
+						'facebook'  => $staff_obj->facebook,
+						'twitter'   => $staff_obj->twitter,
+						'linkedin'  => $staff_obj->linkedin,
+						'youtube'   => $staff_obj->youtube,
 						'instagram' => $staff_obj->instagram,
-						'github' => $staff_obj->github
+						'github'    => $staff_obj->github
 					);
 
-					foreach( $social_arr as $k => $v ) {
-						if( '' != $v ) {
+					foreach ( $social_arr as $k => $v ) {
+						if ( '' != $v ) {
 							$social_output .= '<a target="_blank" href="' . $v . '"><img class="staffer-social-icon" src="' . $staffer->plugin_path . '/public/assets/' . $k . '.svg" alt="" /></a>';
 						}
 					}
@@ -274,13 +278,13 @@ class Staffer_Public {
 					$social_output .= '</div>';
 				}
 
-				$departments_string = rtrim( $departments_string,', ' );
+				$departments_string = rtrim( $departments_string, ', ' );
 
 				echo '<li class="staff-li">';
 
 				echo '<div class="staff-content cw-staffer-clearfix">';
 
-				echo '<a data-bio="' . esc_attr( wpautop( do_shortcode($staff_obj->bio ) ) ) . '"
+				echo '<a data-bio="' . esc_attr( wpautop( do_shortcode( $staff_obj->bio ) ) ) . '"
 									data-name="' . $staff_obj->name . '"
 									data-departments="' . $departments_string . '"
 									data-image="' . esc_attr( $thumbnail ) . '"
@@ -296,17 +300,17 @@ class Staffer_Public {
 									data-google-plus="' . $staff_obj->google_plus . '"
 									data-website="' . $staff_obj->website . '"
 									data-title="' . $staff_obj->title . '"
-									data-staff-slug="' . $staff->post_name. '"
+									data-staff-slug="' . $staff->post_name . '"
 									data-staff-id="' . $staff_obj->ID . '"
 									class="cw-launch-staffer-modal" href="/">' . $thumbnail . '</a>';
-				
-				if( $options['layout'] == 'grid' ) {
+
+				if ( $options['layout'] == 'grid' ) {
 					echo '</div>';
 					echo '<header class="staffer-staff-header">';
 				}
 
 				echo '<h3 class="staffer-staff-title">
-										<a data-bio="' . esc_attr( wpautop( do_shortcode($staff_obj->bio ) ) ) . '"
+										<a data-bio="' . esc_attr( wpautop( do_shortcode( $staff_obj->bio ) ) ) . '"
 											data-name="' . $staff_obj->name . '"
 											data-departments="' . $departments_string . '"
 											data-image="' . esc_attr( $thumbnail ) . '"
@@ -322,33 +326,33 @@ class Staffer_Public {
 											data-google-plus="' . $staff_obj->google_plus . '"
 											data-website="' . $staff_obj->website . '"
 											data-title="' . $staff_obj->title . '"
-											data-staff-slug="' . $staff->post_name. '"
+											data-staff-slug="' . $staff->post_name . '"
 											data-staff-id="' . $staff_obj->ID . '"
 											class="cw-launch-staffer-modal" href="/">
 										' . $staff_obj->name . '</a>
 									</h3>';
 
-				if( $staff_obj->title ) {
+				if ( $staff_obj->title ) {
 					echo '<small class="staffer-staff-title"><em>' . $staff_obj->title . '</em></small>';
 				}
 
-				if( $departments_string ) {
+				if ( $departments_string ) {
 					echo '<small class="staffer-staff-departments"><em>' . $departments_string . '</em></small>';
 				}
 
-				if( $staff_obj->phone ) {
+				if ( $staff_obj->phone ) {
 					echo '<small class="staffer-staff-phone"><em>' . $staff_obj->phone . '</em></small>';
 				}
 
-				if( $staff_obj->email ) {
+				if ( $staff_obj->email ) {
 					echo '<small class="staffer-staff-email"><em>' . $staff_obj->email . '</em></small>';
 				}
 
-				if( $options['layout'] == 'list' ) {
+				if ( $options['layout'] == 'list' ) {
 					echo $social_output;
 				}
 
-				if( $options['layout'] == 'grid' ) {
+				if ( $options['layout'] == 'grid' ) {
 					echo '</header>';
 				}
 
@@ -400,13 +404,13 @@ class Staffer_Public {
 
 		global $post;
 
-		if( $post->ID == $options['main_page_id'] ) {
+		if ( $post->ID == $options['main_page_id'] ) {
 
-			if( !is_admin() && is_singular() && is_main_query() ) {
+			if ( ! is_admin() && is_singular() && is_main_query() ) {
 				//$existing_content = $content;
 				//var_dump( $staffer->build_staff_page() );
 				$staff_feed = $staffer->build_staff_page();
-				$content .= $staff_feed;
+				$content    .= $staff_feed;
 			}
 
 		}
@@ -426,11 +430,11 @@ class Staffer_Public {
 		$staffer = new Staffer();
 		$options = $staffer->get_options();
 
-		if( $post->ID == $options['main_page_id'] ) {
+		if ( $post->ID == $options['main_page_id'] ) {
 			$classes[] = 'staffer-main-page';
 		}
 
-		return $classes;	
+		return $classes;
 	}
 
 }
