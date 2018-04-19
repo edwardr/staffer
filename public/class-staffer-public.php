@@ -341,7 +341,7 @@ class Staffer_Public {
 				}
 
 				if( $staff_obj->email ) {
-					echo '<small class="staffer-staff-email"><em></em></small>';
+					echo '<small class="staffer-staff-email"><em>' . $staff_obj->email . '</em></small>';
 				}
 
 				if( $options['layout'] == 'list' ) {
