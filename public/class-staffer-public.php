@@ -223,17 +223,11 @@ class Staffer_Public {
 		$args = array(
 			'post_type'      => 'staff',
 			'order'          => esc_attr( $order ),
+			'orderby'        => esc_attr( $orderby ),
+			'meta_key'       => esc_attr( $orderby ),
 			'posts_per_page' => (int) $number,
 			'tax_query'      => $tax_query,
 		);
-
-		if ( '' == $orderby ) {
-			$args['orderby'] = 'date';
-		} else {
-			$args['orderby'] = esc_attr( $orderby ),
-			$args['meta_key'] = esc_attr( $orderby ),
-		}
-
 
 		$staff_posts = get_posts( $args );
 
