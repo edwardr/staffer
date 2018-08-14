@@ -120,7 +120,7 @@ class Staffer_Public {
 	 *
 	 * @since  1.0.0
 	 */
-	
+
 	public function register_taxonomies() {
 
 		$staffer = new Staffer();
@@ -144,7 +144,7 @@ class Staffer_Public {
 	 *
 	 * @since  2.0.0
 	 */
-	
+
 	public function staffer_thumbnail_check() {
 
 		if ( !current_theme_supports ('post-thumbnails') ) {
@@ -280,53 +280,53 @@ class Staffer_Public {
 
 				echo '<div class="staff-content cw-staffer-clearfix">';
 
-				echo '<a data-bio="' . esc_attr( wpautop( do_shortcode($staff_obj->bio ) ) ) . '"
-									data-name="' . $staff_obj->name . '"
-									data-departments="' . $departments_string . '"
-									data-image="' . esc_attr( $thumbnail ) . '"
-									data-large-image="' . esc_attr( $large ) . '"
-									data-phone="' . $staff_obj->phone . '"
-									data-email="' . $staff_obj->email . '"
-									data-facebook="' . $staff_obj->facebook . '"
-									data-twitter="' . $staff_obj->twitter . '"
-									data-linkedin="' . $staff_obj->linkedin . '"
-									data-youtube="' . $staff_obj->youtube . '"
-									data-instagram="' . $staff_obj->instagram . '"
-									data-github="' . $staff_obj->github . '"
-									data-google-plus="' . $staff_obj->google_plus . '"
-									data-website="' . $staff_obj->website . '"
-									data-title="' . $staff_obj->title . '"
-									data-staff-slug="' . $staff->post_name. '"
-									data-staff-id="' . $staff_obj->ID . '"
-									class="cw-launch-staffer-modal" href="/">' . $thumbnail . '</a>';
-				
+				echo '<a
+						data-name="' . esc_attr( $staff_obj->name ) . '"
+						data-departments="' . $departments_string . '"
+						data-image="' . esc_attr( $thumbnail ) . '"
+						data-large-image="' . esc_attr( $large ) . '"
+						data-phone="' . $staff_obj->phone . '"
+						data-email="' . $staff_obj->email . '"
+						data-facebook="' . $staff_obj->facebook . '"
+						data-twitter="' . $staff_obj->twitter . '"
+						data-linkedin="' . $staff_obj->linkedin . '"
+						data-youtube="' . $staff_obj->youtube . '"
+						data-instagram="' . $staff_obj->instagram . '"
+						data-github="' . $staff_obj->github . '"
+						data-google-plus="' . $staff_obj->google_plus . '"
+						data-website="' . $staff_obj->website . '"
+						data-title="' . $staff_obj->title . '"
+						data-staff-slug="' . $staff->post_name. '"
+						data-staff-id="' . $staff_obj->ID . '"
+						class="cw-launch-staffer-modal" href="?uid=' . $staff->post_name . '">' . $thumbnail . '</a>';
+
 				if( $options['layout'] == 'grid' ) {
 					echo '</div>';
 					echo '<header class="staffer-staff-header">';
 				}
 
 				echo '<h3 class="staffer-staff-title">
-										<a data-bio="' . esc_attr( wpautop( do_shortcode($staff_obj->bio ) ) ) . '"
-											data-name="' . $staff_obj->name . '"
-											data-departments="' . $departments_string . '"
-											data-image="' . esc_attr( $thumbnail ) . '"
-											data-large-image="' . esc_attr( $large ) . '"
-											data-phone="' . $staff_obj->phone . '"
-											data-email="' . $staff_obj->email . '"
-											data-facebook="' . $staff_obj->facebook . '"
-											data-twitter="' . $staff_obj->twitter . '"
-											data-linkedin="' . $staff_obj->linkedin . '"
-											data-youtube="' . $staff_obj->youtube . '"
-											data-instagram="' . $staff_obj->instagram . '"
-											data-github="' . $staff_obj->github . '"
-											data-google-plus="' . $staff_obj->google_plus . '"
-											data-website="' . $staff_obj->website . '"
-											data-title="' . $staff_obj->title . '"
-											data-staff-slug="' . $staff->post_name. '"
-											data-staff-id="' . $staff_obj->ID . '"
-											class="cw-launch-staffer-modal" href="/">
-										' . $staff_obj->name . '</a>
-									</h3>';
+						<a
+							data-name="' . esc_attr( $staff_obj->name ) . '"
+							data-departments="' . $departments_string . '"
+							data-image="' . esc_attr( $thumbnail ) . '"
+							data-large-image="' . esc_attr( $large ) . '"
+							data-phone="' . $staff_obj->phone . '"
+							data-email="' . $staff_obj->email . '"
+							data-facebook="' . $staff_obj->facebook . '"
+							data-twitter="' . $staff_obj->twitter . '"
+							data-linkedin="' . $staff_obj->linkedin . '"
+							data-youtube="' . $staff_obj->youtube . '"
+							data-instagram="' . $staff_obj->instagram . '"
+							data-github="' . $staff_obj->github . '"
+							data-google-plus="' . $staff_obj->google_plus . '"
+							data-website="' . $staff_obj->website . '"
+							data-title="' . $staff_obj->title . '"
+							data-staff-slug="' . $staff->post_name. '"
+							data-staff-id="' . $staff_obj->ID . '"
+							class="cw-launch-staffer-modal" href="?uid=' . $staff->post_name . '">
+						' . $staff_obj->name . '</a>
+					</h3>';
 
 				if( $staff_obj->title ) {
 					echo '<small class="staffer-staff-title"><em>' . $staff_obj->title . '</em></small>';
@@ -342,6 +342,10 @@ class Staffer_Public {
 
 				if( $staff_obj->email ) {
 					echo '<small class="staffer-staff-email"><em></em></small>';
+				}
+
+				if( $staff_obj->bio ) {
+					echo '<article class="staffer-staff-bio">' . $staff_obj->bio . '</article>';
 				}
 
 				if( $options['layout'] == 'list' ) {
@@ -430,7 +434,7 @@ class Staffer_Public {
 			$classes[] = 'staffer-main-page';
 		}
 
-		return $classes;	
+		return $classes;
 	}
 
 }

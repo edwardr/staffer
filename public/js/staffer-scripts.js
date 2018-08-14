@@ -16,91 +16,100 @@
 			}
 	};
 
-	$(document).ready( function(e) {
-		$('a.cw-launch-staffer-modal').on('click', function(e) {
-			var bio,img,name,title, id, slug,
-			department,website,phone,email,fb,
-			linkedin,twitter,gplus,youtube,
-			instagram,github, iconArr,
-			iconOutput = '';
+	$(document).ready( function() {
+		$('a.cw-launch-staffer-modal').on('click', function(e){
 
-			bio = $(this).attr('data-bio');
-			img = $(this).attr('data-large-image');
-			img = img.replace('aligncenter', 'alignleft');
-			img = img.replace('alignleft', 'alignleft cw-staffer-max-image');
-			name = $(this).attr('data-name');
-			title = $(this).attr('data-title');
-			department = $(this).attr('data-departments');
-			phone = $(this).attr('data-phone');
-			email = $(this).attr('data-email');
-			website = $(this).attr('data-website');
-			id = $(this).attr('data-staff-id');
-			slug = $(this).attr('data-staff-slug');
+			var profile = {
+				'id'          : $(this).attr('data-staff-id'),
+				'slug'        : $(this).attr('data-staff-slug'),
+				'name'        : $(this).attr('data-name'),
+				'title'       : $(this).attr('data-title'),
+				'departments' : $(this).attr('data-departments'),
+				'website'     : $(this).attr('data-website'),
+				'phone'       : $(this).attr('data-phone'),
+				'email'       : $(this).attr('data-email'),
+				'social'      : {
+					'facebook'   : $(this).attr('data-facebook'),
+					'twitter'    : $(this).attr('data-twitter'),
+					'linkedin'   : $(this).attr('data-linkedin'),
+					'googleplus' : $(this).attr('data-google-plus'),
+					'youtube'    : $(this).attr('data-youtube'),
+					'instagram'  : $(this).attr('data-instagram'),
+					'github'     : $(this).attr('data-github'),
+				},
+				'img'         : $(this).attr('data-large-image'),
+				'bio'         : $(this).closest('.staff-li').find('.staffer-staff-bio').html(),
+			};
 
-			fb = $(this).attr('data-facebook');
-			twitter = $(this).attr('data-twitter');
-			linkedin = $(this).attr('data-linkedin');
-			gplus = $(this).attr('data-google-plus');
+			var build = function( profile ){
 
-			youtube = $(this).attr('data-youtube');
-			instagram = $(this).attr('data-instagram');
-			github = $(this).attr('data-github');
+				// modal header
+				$('.cw-staffer-modal .staff-name').text( profile.name );
+				$('.cw-staffer-modal .staff-title').text( profile.title );
+				$('.cw-staffer-modal .staff-department').text( profile.departments );
 
-			iconArr = {
-				'facebook' : fb,
-				'twitter' : twitter,
-				'linkedin' : linkedin,
-				'googleplus' : gplus,
-				'youtube' : youtube,
-				'instagram' : instagram,
-				'github' : github
-			}
-
-			$.each( iconArr, function( key, value ) {
-				if( value !== '' ) {
-					iconOutput += '<a href="' + value + '"><img class="staffer-social-icon" src="' + cwStaffer.plugin_path + '../public/assets/' + key + '.svg' + '" alt="' + name + '"/>';
+				if ( profile.website ) {
+					$('.cw-staffer-modal .staff-website').html('<a class="staffer-website-link" href="' + profile.website + '">' + profile.website + '</a>');
+				} else {
+					$('.cw-staffer-modal .staff-website').empty();
 				}
-			});
 
-			$('.cw-staffer-modal .staff-name').text(name);
-			$('.cw-staffer-modal .cw-modal-header .staff-title').text(title);
-			$('.cw-staffer-modal .cw-modal-header .staff-department').text(department);
+				$('.cw-staffer-modal .staff-phone').text( profile.phone );
+				$('.cw-staffer-modal .staff-email').text( profile.email );
 
-			$('.cw-staffer-modal .cw-modal-header .social-icons').html(iconOutput);
+				var social = '';
+				$.each( profile.social, function( key, value ) {
+					if( value ) {
+						social += '<a href="' + value + '"><img class="staffer-social-icon" src="' + cwStaffer.plugin_path + '../public/assets/' + key + '.svg' + '" alt="' + name + '"/>';
+					}
+				});
+				$('.cw-staffer-modal .social-icons').html(social);
 
-			if( website ) {
-				$('.cw-staffer-modal .cw-modal-header .staff-website').html('<a class="staffer-website-link" href="' + website + '">' + website + '</a>');
-			} else {
-				$('.cw-staffer-modal .cw-modal-header .staff-website').html('');
-			}
+				// modal body
+				var image = '';
+				if( profile.img ) {
+					image = profile.img.replace('aligncenter', 'alignleft');
+					image = profile.img.replace('alignleft', 'alignleft cw-staffer-max-image');
+				}
 
-			$('.cw-staffer-modal .cw-modal-header .staff-phone').text(phone);
-			$('.cw-staffer-modal .cw-modal-header .staff-email').text(email);
+				$('.cw-staffer-modal .cw-modal-body').html( image + profile.bio );
+			};
 
-			$('.cw-staffer-modal .cw-modal-body').html(img + bio);
+			var open = function( slug ){
+				$('.cw-staffer-modal').show();
+				$('html, body').addClass('cw-staffer-overlay');
+				var state = { name: slug };
+				history.pushState( state, null, '?uid=' + slug );
+			};
 
-			$('.cw-staffer-modal').show();
-
-			$('body').addClass('cw-staffer-overlay');
-			$('html').addClass('cw-staffer-overlay');
-
-
-			var state = { name: slug };
-			history.pushState(state, '', '?uid=' + slug );
-
+			build( profile );
+			open( profile.slug );
 			return false;
-
 		});
 
-		$('.cw-staffer-modal .cw-modal-close').on('click', function(e) {
-			$('.cw-staffer-modal').hide();
-			$('body').removeClass('cw-staffer-overlay');
-			$('html').removeClass('cw-staffer-overlay');
+		$('html').on('click', function(e){
 
-			var state = { name: 'none' };
-			history.replaceState(state, '', '?' );
+			var close = function(){
+				$('.cw-staffer-modal').hide();
+				$('html, body').removeClass('cw-staffer-overlay');
+				var state = { name: 'none' };
+				history.replaceState( state, null, window.location.pathname );
+			};
 
-			return false;
+			// check if modal is open, otherwise continue
+			if( $('html').hasClass('cw-staffer-overlay') ) {
+
+				// clicked outside modal
+				if( !$(e.target).closest('.cw-modal-inner').length && !$(e.target).is('.cw-modal-inner') ) {
+					close();
+				}
+			}
+
+			// clicked close button
+			if( $(e.target).is('.cw-modal-close') ) {
+				e.preventDefault();
+				close();
+			}
 		});
 
 		if( $('body').hasClass('staffer-main-page') ) {
