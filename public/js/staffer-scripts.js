@@ -48,8 +48,10 @@
 				$('.cw-staffer-modal .staff-title').text( profile.title );
 				$('.cw-staffer-modal .staff-department').text( profile.departments );
 
-				if( profile.website ) {
+				if ( profile.website ) {
 					$('.cw-staffer-modal .staff-website').html('<a class="staffer-website-link" href="' + profile.website + '">' + profile.website + '</a>');
+				} else {
+					$('.cw-staffer-modal .staff-website').empty();
 				}
 
 				$('.cw-staffer-modal .staff-phone').text( profile.phone );
